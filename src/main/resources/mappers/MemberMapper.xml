@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+	<select id="getPwById" resultType="java.lang.String">
+		SELECT pw FROM member WHERE id=#{id}
+	</select>
+	<select id="getNicknameCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM member WHERE nickname=#{nickname}
+	</select>
+	<select id="getIdCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM member WHERE id=#{id}
+	</select>
+	<insert id="insertMember">
+		INSERT INTO member(id, pw, nickname, email) 
+		VALUES(#{id}, #{pw}, #{nickname}, #{email})
+	</insert>
+	<select id="getMenuBarProfile" resultType="map">
+		SELECT nickname, profile_img
+		FROM member
+		WHERE id=#{id}
+	</select>
+	<update id="updateProfile">
+		UPDATE member SET nickname=#{nickname}, profile_img=#{profileImg} WHERE id=#{id}
+	</update>
+	<select id="getNicknameById" resultType="java.lang.String">
+		SELECT nickname FROM member WHERE id=#{id}
+	</select>
+	<select id="getIdByNaverToken" resultType="java.lang.String">
+		SELECT id FROM member WHERE naver_access_token=#{naverToken}
+	</select>
+	<update id="updateNaverToken">
+		UPDATE member SET naver_access_token=#{naverToken} WHERE id=#{id}
+	</update>
+	<select id="getIdByEmail" resultType="java.lang.String">
+		SELECT id FROM member WHERE email=#{email}
+	</select>
+	<update id="updatePw">
+		UPDATE member SET pw=#{pw} WHERE id=#{id}
+	</update>
+</mapper>

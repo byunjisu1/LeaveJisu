@@ -1,0 +1,198 @@
+@charset "UTF-8";
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+#loginlogo {
+	font-size: 30px;
+	font-weight: bold;
+	margin: 150px auto 60px;
+	width: 128px;
+ }
+#container { border: 1px solid lightgrey; width: 300px; margin: 0 auto; }
+#naverlogin {
+ 	width: 200px;
+ 	margin: 20px auto;
+}
+#naverloginbutton {
+	padding:0;
+	border:0;
+	cursor: pointer;
+}
+#naverloginbutton > img{
+	width:200px;
+}
+.naver-btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: #03C75A;
+    color: #fff;
+    width: 200px;
+    height: 48px;
+    padding: 0 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+.naver-btn:hover {
+    background-color: #17b75e;
+}
+.naver-logo-symbol {
+    background-image: url('https://static.nid.naver.com/oauth/button_g.PNG'); 
+    background-size: 40px;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    margin-right: 12px;
+    background-repeat: no-repeat;
+}
+#idpassword > div {
+	margin : 10px auto;
+	width: 200px;
+	height: 52px;
+}
+#idpassword > div > input { 
+	border: 1px solid rgba(58, 58, 58, 0.3);
+	border-radius: 3px;
+	width: 200px;
+	height: 30px; 
+}
+#login {
+	width: 200px;
+	height: 45px;
+	margin: 30px auto 20px;
+}
+#login > button {
+	width: 100%;
+	height: 100%;
+	color: white;
+	background-color: black;
+	border-radius: 10px;
+	cursor: pointer;
+}
+#search {
+	width:200px;
+	min-height:50px;
+	margin: 0 auto;
+}
+#search > .searchid {
+	width:200px;
+	height:19.5px;
+  		margin: 0;
+}
+#join {
+	position:relative;
+	width: 200px;
+	height: 45px;
+	background-color: rgba(58, 58, 58, 0.4);
+	margin: 20px auto;
+	border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+#join > span {
+	position:absolute;
+	color: black;
+    top: 10px;
+    left: 50px;
+}
+#search > .searchid {
+	cursor:pointer;
+}
+#search > .searchpassword {
+	cursor:pointer;
+}
+#black_filter {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color: rgba(0,0,0,0.7);
+}
+#popup_searchid {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 300px;
+    height: 150px;
+    z-index: 20;
+    box-shadow: 0 18px 48px 0 #00000059;
+    border-radius: 8px;
+	text-align: center;
+}
+#popup_searchid > span:first-child {	/* 이메일로 아이디 찾기 */
+	position: absolute;
+	margin: 30px 10px;
+	font-weight: bold;
+}
+#popup_searchid > button:nth-child(2) {	/* input 버튼 */
+	padding: 0;
+	border: 0;
+	margin-top: 70px;
+	border: 1px solid rgba(58, 58, 58, 0.5);
+	height: 30px; 
+}
+#popup_searchid > button:nth-child(2) > input { height: 30px; }
+#popup_searchid > button:nth-child(3) {	/* 검색 */
+    margin: 0 -30px 0 10px;
+    width: 60px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid rgba(58, 58, 58, 0.5);
+    border-radius:5px;
+    cursor: pointer;
+}
+#popup_searchid > div:nth-child(4) {	/* 'x' */
+	cursor: pointer;	
+	height: 34px;
+	width: 34px;
+	background: url(https://assets.triple.guide/images/btn-com-close@3x.png) center / 100%;
+}
+#popup_searchpassword {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 500px;
+    z-index: 20;
+    box-shadow: 0 18px 48px 0 #00000059;
+    border-radius: 8px;
+	text-align: center;
+}
+#popup_searchpassword > div:nth-child(1) { margin-top: 20px; font-weight: bold; }
+#popup_searchpassword > div:nth-child(2), #popup_searchpassword > div:nth-child(3) {	/* 아이디, 이메일 */
+    margin: 30px auto;
+}
+#popup_searchpassword > div > span:first-child {
+    margin-right: 23px;
+}
+#popup_searchpassword > div > button:nth-child(2) {
+	padding:0;
+	border:0;
+}
+#popup_searchpassword > div > button:nth-child(2) > input { height: 30px; }
+#popup_searchpassword > button:nth-child(4) {	/* 검색 */
+  	background-color: white;
+    border: 1px solid rgba(58, 58, 58, 0.5);
+    border-radius:5px;
+   	background: white;
+   	width:60px;
+   	height: 30px;
+   	margin-bottom: 25px;
+   	cursor: pointer;
+}
+#popup_searchpassword > .x {	/* 'x' */
+	cursor: pointer;
+	height: 34px;
+	width: 34px;
+	background: url(https://assets.triple.guide/images/btn-com-close@3x.png) center / 100%;
+	margin-top: -175px;
+}
+.fl { float: left;}
+.fr { float: right;}

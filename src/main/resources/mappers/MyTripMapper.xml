@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyTripMapper">
+	<select id="getPlanDetailPlace" resultType="com.js.dto.PlanDetailPlaceDto">
+		SELECT 
+			pp.day, 
+			p.name, 
+			p.category, 
+			pp.place_order AS placeOrder,
+			pp.plan_place_idx AS planPlaceIdx
+		FROM plan_place pp, place p
+		WHERE pp.place_idx=p.place_idx AND plan_idx=#{planIdx}
+		ORDER BY pp.day, pp.place_order
+	</select>
+	<select id="getPlanDetailPlaceMemo" resultType="com.js.dto.PlanDetailPlaceMemoDto">
+		SELECT memo_idx AS memoIdx, content, plan_place_idx AS planPlaceIdx
+		FROM plan_memo
+		WHERE plan_place_idx=#{planPlaceIdx}
+	</select>
+	<select id="getPlanDetail" resultType="com.js.dto.PlanDetailDto">
+		SELECT 
+			p.start_date AS startDate, 
+			p.days, 
+			c.city_name AS cityName
+		FROM plan p, (SELECT city_idx, plan_idx FROM plan_city ORDER BY city_idx) pc, city c, member m
+		WHERE p.plan_idx=pc.plan_idx AND pc.city_idx=c.city_idx AND p.plan_idx=#{planIdx} AND p.member_id=m.id
+	</select>
+	<select id="getPlanPlaceMap" resultType="com.js.dto.PlanPlaceMapDto">
+		SELECT
+			pp.day,
+			pp.place_order AS placeOrder,
+			p.place_idx AS placeIdx,
+			p.name,
+			p.latitude,
+			p.longitude
+		FROM place p, plan_place pp, plan pl
+		WHERE p.place_idx=pp.place_idx AND pl.plan_idx=pp.plan_idx AND pl.plan_idx=#{planIdx}
+		ORDER BY pp.day, pp.place_order
+	</select>
+	<insert id="insertPlaceMemo">
+		<selectKey keyProperty="memoIdx" resultType="int" order="AFTER">
+        	SELECT seq_memo_idx.currval FROM dual
+    	</selectKey>
+    	
+		INSERT INTO plan_memo(memo_idx, plan_place_idx, content)
+		VALUES(seq_memo_idx.nextval, #{planPlaceIdx}, #{content})
+	</insert>
+	<delete id="deletePlaceMemo">
+		DELETE FROM plan_memo WHERE memo_idx=#{memoIdx}
+	</delete>
+	<select id="getMyPlaceList" resultType="com.js.dto.MyPlaceListDto">
+		SELECT
+			p.place_idx AS placeIdx,
+			p.category, 
+			c.city_name AS cityName,
+			p.name, 
+			p.intro, 
+			p.place_img AS placeImg,
+			mp.content,
+			(SELECT NVL(AVG(star),0) FROM review WHERE place_idx=mp.place_idx) AS starScore,
+		    (SELECT COUNT(*) FROM review WHERE place_idx=mp.place_idx ) AS reviewCnt
+		FROM myplace mp, place p, member m, city c
+		WHERE mp.member_id=m.id AND mp.place_idx=p.place_idx AND p.city_idx=c.city_idx AND m.id=#{id}
+		ORDER BY placeIdx
+	</select>
+	<update id="updateMyPlaceMemo">
+		UPDATE myplace 
+		SET content=#{content} 
+		WHERE member_id=#{id} AND place_idx=#{placeIdx}
+	</update>
+	<select id="getMemberDetail" resultType="com.js.dto.MemberDto">
+		SELECT
+			id,
+			nickname,
+			profile_img AS profileImg
+		FROM member
+		WHERE id=#{id}
+	</select>
+	<delete id="deleteMyPlace">
+		DELETE FROM myplace 
+		WHERE member_id=#{id} AND place_idx=#{placeIdx}
+	</delete>
+	<insert id="insertMyPlace">
+		INSERT INTO myplace(member_id, place_idx)
+		VALUES (#{id}, #{placeIdx})
+	</insert>
+	<select id="upcomingPlan" resultType="com.js.dto.UpcomingPlanListDto">
+		SELECT
+			p.plan_idx AS planIdx,
+		    p.start_date AS startDate,
+		    p.days,
+		    c.city_name AS cityName,
+		    c.city_img AS cityImg
+		FROM (
+				SELECT city_idx, plan.plan_idx, days, start_date 
+				FROM plan_city, plan 
+				WHERE plan_city.plan_idx=plan.plan_idx AND member_id=#{id} AND start_date>=sysdate 
+				ORDER BY start_date, city_idx
+			) p, city c
+		WHERE p.city_idx=c.city_idx
+	</select>
+	<update id="updatePlanDate">
+		UPDATE plan SET start_date=TO_DATE(#{startDate}, 'YYYY-MM-DD'), days=#{days} WHERE plan_idx=#{planIdx}
+	</update>
+	<delete id="deletePlan">
+		BEGIN
+			DELETE FROM plan WHERE plan_idx=#{planIdx};
+			DELETE FROM plan_place WHERE plan_idx=#{planIdx};
+			DELETE FROM plan_city WHERE plan_idx=#{planIdx};
+		END;
+	</delete>
+	<select id="getCityList" resultType="com.js.dto.CityListDto">
+		SELECT
+			city_idx AS cityIdx,
+			country,
+			city_name AS cityName,
+			near_city AS nearCity,
+			city_img AS cityImg 
+		FROM city
+		ORDER BY city_idx
+	</select>
+	<select id="getMyReview" resultType="com.js.dto.MyReviewListDto">
+		SELECT
+		    c.city_name AS cityName,
+		    p.name,
+		    p.category,
+		    review_idx AS reviewIdx,
+		    r.place_idx AS placeIdx,
+		    content,
+		    star,
+		    review_date AS reviewDate,
+		    trip_date AS tripDate,
+		    (SELECT COUNT(*) FROM review_good WHERE member_id=#{id} AND review_idx=r.review_idx) AS reviewGood,
+		    (SELECT COUNT(*) FROM review_good WHERE review_idx=r.review_idx) AS reviewGoodN
+		FROM review r, place p, city c
+		WHERE r.place_idx=p.place_idx AND p.city_idx=c.city_idx AND member_id=#{id}
+		ORDER BY r.place_idx
+	</select>
+	<select id="getMyCityReview" resultType="com.js.dto.MyReviewListDto">
+		SELECT
+			c.city_name AS cityName,
+			r.recommend_review_idx AS recommendReviewIdx,
+			r.content, 
+			r.review_date AS reviewDate, 
+			r.trip_date AS tripDate,
+			(SELECT COUNT(*) FROM recommend_review_good WHERE member_id=#{id} AND recommend_review_idx=r.recommend_review_idx) AS reviewGood,
+			(SELECT COUNT(*) FROM recommend_review_good WHERE recommend_review_idx=r.recommend_review_idx) AS reviewGoodN
+		FROM recommend_review r, member m, city c
+		WHERE r.member_id=m.id AND r.city_idx=c.city_idx AND r.member_id=#{id}
+		ORDER BY r.city_idx
+	</select>
+	<insert id="insertReview">
+		<selectKey keyProperty="reviewIdx" resultType="int" order="AFTER">
+        	SELECT seq_review_idx.currval FROM dual
+    	</selectKey>
+    	
+		INSERT INTO review(review_idx, place_idx, member_id, content, star, trip_date)
+		VALUES(seq_review_idx.nextval, #{placeIdx}, #{id}, #{content}, #{star}, #{tripDate})
+	</insert>
+	<insert id="insertReviewPic">
+		<selectKey keyProperty="reviewOrder" resultType="int" order="BEFORE">
+        	SELECT NVL(MAX(review_order),0)+1 
+        	FROM review_pic
+        	WHERE review_idx=#{reviewIdx}
+    	</selectKey>
+	
+		INSERT INTO review_pic(review_idx, review_img, review_order)
+		VALUES(#{reviewIdx}, #{reviewImg}, #{reviewOrder})
+	</insert>
+	<select id="getStarComment" resultType="java.lang.String">
+		SELECT star_comment FROM star WHERE star_cnt=#{star}
+	</select>
+	<select id="getPlaceDetail" resultType="com.js.dto.PlaceDto">
+		SELECT 	
+		    place_idx AS placeIdx, 
+		    international, 
+		    city_idx AS cityIdx, 
+		    category, 
+		    name, 
+		    intro, 
+		    location, 
+            place_img AS placeImg, 
+            phone, 
+            time, 
+            close, 
+            latitude, 
+            longitude, 
+		    (SELECT city_name FROM city WHERE city_idx=p.city_idx) AS cityName,
+		    (SELECT NVL(AVG(star),0) FROM review WHERE place_idx=p.place_idx) AS starScore,
+		    (SELECT COUNT(*) FROM review WHERE place_idx=p.place_idx ) AS reviewCnt,
+		    (SELECT COUNT(*) FROM myplace WHERE place_idx=p.place_idx AND member_id=#{id}) AS myHeart,
+		    (SELECT COUNT(*) FROM myplace WHERE place_idx=p.place_idx ) AS heartCnt
+        FROM place p
+        WHERE place_idx=#{placeIdx}
+	</select>
+	<select id="getPlaceReview" resultType="com.js.dto.PlaceReviewDto">
+		SELECT
+		    review_idx AS reviewIdx,
+		    m.nickname,
+		    m.profile_img AS profileImg,
+		    content,
+		    star,
+		    review_date AS reviewDate,
+		    trip_date AS tripDate,
+		    (SELECT COUNT(*) FROM review_good WHERE member_id=#{id} AND review_idx=r.review_idx) AS reviewGood,
+		    (SELECT COUNT(*) FROM review_good WHERE review_idx=r.review_idx) AS reviewGoodN
+		FROM review r, member m
+		WHERE r.member_id=m.id AND place_idx=#{placeIdx}
+	</select>
+	<select id="getPlaceReviewImg" resultType="java.lang.String">
+		SELECT review_img
+		FROM review_pic
+		WHERE review_idx=#{reviewIdx}
+		ORDER BY review_order
+	</select>
+	<delete id="deletePlaceReviewGood">
+		DELETE FROM review_good WHERE review_idx=#{reviewIdx} AND member_id=#{id}
+	</delete>
+	<insert id="insertPlaceReviewGood">
+		INSERT INTO review_good(member_id, review_idx)
+		VALUES(#{id}, #{reviewIdx})
+	</insert>
+	<select id="getPlaceReviewGoodN" resultType="java.lang.Integer">
+		SELECT
+			(SELECT COUNT(*) FROM review_good WHERE review_idx=r.review_idx) AS reviewGoodN
+		FROM review r
+		WHERE r.review_idx=#{reviewIdx}
+	</select>
+	<insert id="insertClick">
+		INSERT INTO click(member_id, place_idx)
+		VALUES(#{id}, #{placeIdx})
+	</insert>
+	<delete id="deleteMyReview">
+		BEGIN
+			DELETE FROM review WHERE review_idx=#{reviewIdx};
+			DELETE FROM review_good WHERE review_idx=#{reviewIdx};
+			DELETE FROM review_pic WHERE review_idx=#{reviewIdx};
+		END;
+	</delete>
+	<select id="addMyPlace" resultType="com.js.dto.AddPlaceDto">
+		SELECT
+		    mp.place_idx AS placeIdx,
+		    p.name,
+		    p.category,
+		    p.place_img AS placeImg,
+		    c.city_name AS cityName,
+		    p.latitude,
+		    p.longitude
+		FROM myplace mp, place p, city c
+		WHERE mp.place_idx=p.place_idx AND p.city_idx=c.city_idx AND member_id=#{id}
+	</select>
+	<select id="addRecommendPlace" resultType="com.js.dto.AddPlaceDto">
+		SELECT
+		    p.place_idx AS placeIdx,
+		    p.name,
+		    p.category,
+		    p.place_img AS placeImg,
+		    c.city_name AS cityName,
+		    p.latitude,
+		    p.longitude
+		FROM plan_city pc, place p, city c
+		WHERE pc.city_idx=p.city_idx AND p.city_idx=c.city_idx AND pc.plan_idx=#{planIdx}
+		ORDER BY pc.city_idx
+	</select>
+	<insert id="insertPlan" parameterType="com.js.dto.AddPlanDto">
+		<selectKey keyProperty="planIdx" resultType="int" order="AFTER">
+        	SELECT seq_plan_idx.currval FROM dual
+    	</selectKey>
+    	
+		INSERT INTO plan(plan_idx, member_id, start_date, days)
+		VALUES(seq_plan_idx.nextval, #{id}, TO_DATE(#{startDate}, 'YYYY-MM-DD'), #{days})
+	</insert>
+	<insert id="insertPlanCity">
+		INSERT INTO plan_city(plan_idx, plan_order, city_idx)
+		VALUES(#{planIdx}, #{planOrder}, #{cityIdx})
+	</insert>
+	<insert id="insertPlanPlace">
+		INSERT INTO plan_place(plan_place_idx, plan_idx, day, place_order, place_idx)
+		VALUES(seq_plan_place_idx.nextval, #{planIdx}, #{day}, (SELECT NVL(MAX(place_order), 0) + 1 FROM plan_place WHERE plan_idx=#{planIdx} AND day=#{day}), #{placeIdx})
+	</insert>
+	<select id="getCityIdxByName" resultType="java.lang.Integer">
+		SELECT city_idx FROM city WHERE city_name=#{name}
+	</select>
+	<delete id="deletePlanPlace">
+		BEGIN
+			DELETE FROM plan_place WHERE plan_place_idx=#{planPlaceIdx};
+			DELETE FROM plan_memo WHERE plan_place_idx=#{planPlaceIdx};
+		END;
+	</delete>
+	<select id="getPlaceOrder" resultType="java.lang.Integer">
+		SELECT place_order AS placeOrder
+		FROM plan_place
+		WHERE plan_place_idx=#{planPlaceIdx}
+	</select>
+	<update id="updatePlaceOrder">
+		UPDATE plan_place SET place_order=place_order-1 WHERE place_order>#{deleteOrder}
+	</update>
+	
+	<select id="selectMenuBarProfile" resultType="com.js.dto.MenuBarProfileDto">		
+		SELECT 
+		    pc.start_date AS startDate,
+		    pc.days,
+		    pc.plan_idx AS planIdx,
+		    c.city_img AS cityImg, 
+		    c.city_name AS cityName
+		FROM(
+			SELECT plan.plan_idx, city_idx, plan.start_date, plan.days
+			FROM plan_city, plan
+			WHERE plan_city.plan_idx=plan.plan_idx AND plan.start_date >= SYSDATE AND plan.member_id=#{id}
+			ORDER BY plan.start_date, plan.plan_idx, plan_city.plan_order) pc, city c
+		WHERE pc.city_idx=c.city_idx
+	</select>
+	<select id="selectMyBell" resultType="com.js.dto.MyBellListDto">
+		SELECT
+			bell_idx AS bellIdx,
+			review_idx AS reviewIdx, 
+			recommend_review_idx AS recommendReviewIdx, 
+			click_id AS clickId,
+			m.nickname AS nickname
+		FROM bell, member m
+		WHERE bell.click_id=m.id AND member_id=#{id}
+		ORDER BY bell_idx DESC
+	</select>
+	<delete id="deleteAllMyBells">
+		DELETE FROM bell WHERE member_id=#{id}
+	</delete>
+	<delete id="deleteMyBell">
+		DELETE FROM bell WHERE bell_idx=#{bellIdx}
+	</delete>
+	<insert id="insertBell">
+		<selectKey keyProperty="bellIdx" resultType="int" order="AFTER">
+        	SELECT seq_bell_idx.currval FROM dual
+    	</selectKey>
+		INSERT INTO bell(bell_idx, review_idx, recommend_review_idx, click_id, member_id)
+		VALUES(seq_bell_idx.nextval, #{reviewIdx, jdbcType=INTEGER}, #{recommendReviewIdx, jdbcType=INTEGER}, #{id}, #{memberId})
+	</insert>
+	<select id="selectWriterIdByReviewIdx" resultType="java.lang.String">
+		SELECT member_id FROM review WHERE review_idx = #{reviewIdx}	
+	</select>
+	<insert id="insertAiPackImg">
+		MERGE INTO ai_pack a
+		USING dual
+		   ON (a.member_id = #{id})
+		WHEN MATCHED THEN
+		    UPDATE SET 
+		        img_filename = #{filename},
+		        present_list = null,
+		        missing_list = null,
+		        advice = null
+		WHEN NOT MATCHED THEN
+		    INSERT (member_id, img_filename, present_list, missing_list, advice)
+		    VALUES (#{id}, #{filename}, null, null, null)
+	</insert>
+	<update id="updateAiPack">
+		UPDATE ai_pack
+		SET present_list = #{present},
+			missing_list = #{missing},
+			advice = #{advice}
+		WHERE member_id = #{id}
+	</update>
+	<select id="getAiPackCityDays" resultType="map">
+		<![CDATA[
+			SELECT
+			    city_name,
+			    days
+			FROM(
+			    SELECT
+			        plan_idx,
+			        start_date,
+			        days
+			    FROM plan
+			    WHERE member_id=#{id} AND start_date>=sysdate
+			    ORDER BY start_date
+			    ) p, plan_city pc, city c
+			WHERE rownum=1 AND p.plan_idx=pc.plan_idx AND pc.city_idx=c.city_idx
+		]]>
+	</select>
+</mapper>

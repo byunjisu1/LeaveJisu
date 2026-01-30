@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TripInfoMapper">
+	<select id="getRecommendPlaceTop10" resultType="com.js.dto.PlaceDto">
+		<![CDATA[
+			SELECT t2.*
+			FROM (
+			    SELECT rownum rnum, t1.*
+			    FROM (
+			        SELECT 	place_idx AS placeIdx, 
+			                international, 
+			                city_idx AS cityIdx, 
+			                category, 
+			                name, 
+			                intro, 
+			                location, 
+			                place_img AS placeImg, 
+			                phone, 
+			                time, 
+			                close, 
+			                latitude, 
+			                longitude, 
+			                (SELECT COUNT(*) FROM click WHERE place_idx=p.place_idx) clicks,
+			                (SELECT city_name FROM city WHERE city_idx=p.city_idx) AS cityName,
+			                (SELECT NVL(AVG(star),0) FROM review WHERE place_idx=p.place_idx) AS starScore,
+			                (SELECT COUNT(*) FROM review WHERE place_idx=p.place_idx ) AS reviewCnt,
+			                (SELECT COUNT(*) FROM myplace WHERE place_idx=p.place_idx ) AS heartCnt
+			        FROM place p
+			        WHERE city_idx = #{cityIdx}
+			        ORDER BY clicks DESC
+			    ) t1
+			) t2
+			WHERE rnum <= 10
+		]]>
+	</select>
+	<select id="getCityList" resultType="com.js.dto.CityListDto">
+		SELECT 
+			c.city_idx AS cityIdx, 
+			c.city_name AS cityName, 
+			c.city_img AS cityImg
+		FROM city c INNER JOIN recommend_plan_city rpc
+		ON c.city_idx = rpc.city_idx
+		ORDER BY rpc.city_order
+	</select>
+	<select id="getConcept" resultType="com.js.dto.RecommendPlanDetailDto">
+		SELECT 
+			recommend_plan_idx AS recommendPlanIdx, 
+			concept, 
+			day, 
+			content
+		FROM recommend_plan 
+		WHERE city_idx=#{cityIdx}
+		ORDER BY recommend_plan_idx
+	</select>
+	<select id="getRecommendPlaceList" resultType="com.js.dto.RecommendPlanPlaceDto">
+		SELECT
+			p.place_idx AS placeIdx,
+			p.name AS placeName, 
+			p.place_img AS placeImg, 
+			p.intro, 
+			p.category, 
+			c.city_name AS cityName, 
+			p.location, 
+			p.latitude,
+			p.longitude,
+			rp.place_order AS placeOrder,
+			rp.place_time AS placeTime
+		FROM recommend_place rp, place p, city c
+		WHERE rp.place_idx=p.place_idx AND p.city_idx=c.city_idx AND rp.recommend_plan_idx=#{recommendPlanIdx}
+		ORDER BY rp.place_order
+	</select>
+	<select id="getBlogList" resultType="com.js.dto.BlogListDto">
+		SELECT 
+			b.blog_idx AS blogIdx,
+			m.nickname, 
+			m.profile_img AS profileImg, 
+			b.title, 
+			b.days, 
+			b.img_url AS imgUrl, 
+			b.intro 
+		FROM blog b, member m 
+		WHERE b.member_id=m.id
+		ORDER BY b.blog_idx
+	</select>
+	<select id="getBlogImg" resultType="java.lang.String">
+		<![CDATA[
+			SELECT
+				place_pic AS blogImgUrl
+			FROM blog_place 
+			WHERE place_pic IS NOT NULL AND rownum <=4 AND blog_idx=#{blogIdx}
+		]]>
+	</select>
+	<select id="getRecommendPlanReview" resultType="com.js.dto.ReviewListDto">
+		SELECT
+			r.recommend_review_idx AS recommendReviewIdx,
+			m.nickname, 
+			m.profile_img AS profileImg, 
+			r.content, 
+			r.review_date AS reviewDate, 
+			r.trip_date AS tripDate,
+			(SELECT COUNT(*) FROM recommend_review_good WHERE member_id=#{id} AND recommend_review_idx=r.recommend_review_idx) AS reviewGood,
+			(SELECT COUNT(*) FROM recommend_review_good WHERE recommend_review_idx=r.recommend_review_idx) AS reviewGoodN
+		FROM recommend_review r, member m
+		WHERE r.member_id=m.id  AND city_idx=#{cityIdx}
+		ORDER BY reviewGoodN DESC
+	</select>
+	<select id="getRecommendReviewImgList" resultType="java.lang.String">
+		SELECT review_img
+		FROM recommend_review_pic
+		WHERE recommend_review_idx = #{recommendReviewIdx}
+	</select>
+	<select id="getRecommendPlanReviewOrderRecent" resultType="com.js.dto.ReviewListDto">
+		SELECT 
+			m.nickname, 
+			m.profile_img AS profileImg, 
+			r.content, 
+			r.review_date AS reviewDate, 
+			r.trip_date AS tripDate,
+			(SELECT COUNT(*) FROM recommend_review_good WHERE member_id=#{id} AND recommend_review_idx=r.recommend_review_idx) AS reviewGood,
+			(SELECT COUNT(*) FROM recommend_review_good WHERE recommend_review_idx=r.recommend_review_idx) AS reviewGoodN
+		FROM recommend_review r, member m
+		WHERE r.member_id=m.id  AND city_idx=#{cityIdx}
+		ORDER BY review_date DESC
+	</select>
+	<insert id="insertRecommendReview">
+		<selectKey keyProperty="recommendReviewIdx" resultType="int" order="AFTER">
+        	SELECT seq_recommend_review_idx.currval FROM dual
+    	</selectKey>
+    	
+		INSERT INTO recommend_review(recommend_review_idx, city_idx, member_id, content, trip_date)
+		VALUES(seq_recommend_review_idx.nextval, #{cityIdx}, #{id}, #{content}, #{tripDate})
+	</insert>
+	<insert id="insertRecommendReviewPic">
+		<selectKey keyProperty="reviewOrder" resultType="int" order="BEFORE">
+        	SELECT NVL(MAX(review_order),0)+1 
+        	FROM recommend_review_pic
+        	WHERE recommend_review_idx=#{recommendReviewIdx}
+    	</selectKey>
+	
+		INSERT INTO recommend_review_pic(recommend_review_idx, review_img, review_order)
+		VALUES(#{recommendReviewIdx}, #{reviewImg}, #{reviewOrder})
+	</insert>
+	<select id="getBlogDetail" resultType="com.js.dto.BlogDetailDto">
+		SELECT
+			nickname,
+			profile_img AS profileImg,
+			blog_idx AS blogIdx, 
+			title, 
+			days, 
+			img_url AS imgUrl, 
+			intro 
+		FROM blog b, member m
+		WHERE b.member_id=m.id AND blog_idx=#{blogIdx}
+	</select>
+	<select id="getBlogDetailPlace" resultType="com.js.dto.BlogDetailPlaceDto">
+		SELECT
+			c.city_idx AS cityIdx,
+			c.city_name AS cityName,
+			p.place_idx AS placeIdx,
+			day, 
+			p.name AS placeName,
+			bp.place_order AS placeOrder,
+			p.category, 
+			content, 
+			place_pic AS placeImg, 
+			place_star AS placeStar
+		FROM blog_place bp, place p, city c
+		WHERE bp.place_idx=p.place_idx AND p.city_idx=c.city_idx AND blog_idx=#{blogIdx}
+		ORDER BY day, place_order
+	</select>
+	<select id="getPlanCourse" resultType="com.js.dto.PlanCourseDto">
+		SELECT 
+			p.place_idx AS placeIdx,
+			name,
+			p.latitude,
+			p.longitude,
+			bp.day,
+			place_order AS placeOrder,
+			p.category
+		FROM blog b, blog_place bp, place p 
+		WHERE b.blog_idx=bp.blog_idx AND bp.place_idx=p.place_idx AND b.blog_idx=#{blogIdx}
+		ORDER BY day, place_order
+	</select>
+	<select id="getBlogCommentList" resultType="com.js.dto.BlogCommentListDto">
+		SELECT
+			b.blog_comment_idx AS blogCommentIdx,
+			m.id,
+			m.nickname, 
+			m.profile_img AS profileImg, 
+			b.content,
+			(SELECT COUNT(*) FROM blog_comment_good WHERE member_id=#{id} AND blog_comment_idx=b.blog_comment_idx) AS commentGood,
+			(SELECT COUNT(*) FROM blog_comment_good WHERE blog_comment_idx=b.blog_comment_idx) AS commentGoodN
+		FROM member m, blog_comment b
+		WHERE m.id=b.member_id AND b.blog_idx=#{blogIdx}
+		ORDER BY blogCommentIdx DESC 
+	</select>
+	<select id="getBlogCommentByIdx" resultType="com.js.dto.BlogCommentListDto">
+		SELECT
+			b.blog_comment_idx AS blogCommentIdx,
+			m.nickname, 
+			m.profile_img AS profileImg, 
+			b.content,
+			(SELECT COUNT(*) FROM blog_comment_good WHERE member_id=#{id} AND blog_comment_idx=b.blog_comment_idx) AS commentGood,
+			(SELECT COUNT(*) FROM blog_comment_good WHERE blog_comment_idx=b.blog_comment_idx) AS commentGoodN
+		FROM member m, blog_comment b
+		WHERE m.id=b.member_id AND b.blog_comment_idx=#{blogCommentIdx}
+		ORDER BY b.blog_comment_idx
+	</select>
+	<select id="getBlogPlaceMap" resultType="com.js.dto.BlogPlaceMapDto">
+		SELECT 
+			day, 
+			place_order AS placeOrder, 
+			name, 
+			latitude, 
+			longitude
+		FROM place p, blog_place bp
+		WHERE p.place_idx=bp.place_idx AND blog_idx=#{blogIdx}
+		ORDER BY day, place_order
+	</select>
+	<delete id="deleteBlogCommentGood">
+		DELETE FROM blog_comment_good WHERE blog_comment_idx=#{blogCommentIdx} AND member_id=#{id}
+	</delete>
+	<insert id="insertBlogCommentGood">
+		INSERT INTO blog_comment_good(member_id, blog_comment_idx)
+		VALUES(#{id}, #{blogCommentIdx})
+	</insert>
+	<select id="getBlogCommentN" resultType="hashmap">
+		SELECT
+			b.blog_comment_idx AS blogCommentIdx,
+			(SELECT COUNT(*) FROM blog_comment_good WHERE blog_comment_idx=b.blog_comment_idx) AS commentGoodN
+		FROM blog_comment b
+		WHERE b.blog_idx=#{blogIdx}
+		ORDER BY b.blog_comment_idx
+	</select>
+	<insert id="insertBlogComment" parameterType="com.js.dto.BlogCommentListDto">
+		<selectKey keyProperty="blogCommentIdx" resultType="int" order="AFTER">
+        	SELECT seq_blog_comment_idx.currval FROM dual
+    	</selectKey>
+    
+		INSERT INTO blog_comment(blog_comment_idx, blog_idx, member_id, content)
+		VALUES(seq_blog_comment_idx.nextval, #{blogIdx}, #{id}, #{content})
+	</insert>
+	<delete id="deleteBlogComment">
+		BEGIN
+			DELETE FROM blog_comment WHERE blog_comment_idx=#{blogCommentIdx};
+			DELETE FROM blog_comment_good WHERE blog_comment_idx=#{blogCommentIdx};
+		END;
+	</delete>
+	<update id="updateBlogComment">
+		UPDATE blog_comment SET content=#{content} WHERE blog_comment_idx=#{blogCommentIdx}
+	</update>
+	<delete id="deleteRecommendPlanReviewGood">
+		DELETE FROM recommend_review_good WHERE recommend_review_idx=#{recommendReviewIdx} AND member_id=#{id}
+	</delete>
+	<insert id="insertRecommendPlanReviewGood">
+		INSERT INTO recommend_review_good(member_id, recommend_review_idx)
+		VALUES(#{id}, #{recommendReviewIdx})
+	</insert>
+	<select id="getRecommendReviewCommentN" resultType="java.lang.Integer">
+		SELECT
+			(SELECT COUNT(*) FROM recommend_review_good WHERE recommend_review_idx=r.recommend_review_idx) AS commentGoodN
+		FROM recommend_review r
+		WHERE r.recommend_review_idx=#{recommendReviewIdx}
+	</select>
+	
+	<select id="getAirportList" resultType="com.js.dto.AirportListDto">
+		SELECT
+			airport_id AS airportId,
+			airport_name AS airportName,
+			country
+		FROM t_airport
+	</select>
+	<select id="getAirlineIdList" resultType="java.lang.String">
+		SELECT airline_id
+		FROM t_airline
+	</select>
+	<update id="setAirlineLogo">
+		UPDATE t_airline
+		SET airline_logo=#{imgUrl}
+		WHERE airline_id=#{id}
+	</update>
+	<select id="getAirlineLogoNameById" resultType="map">
+		SELECT airline_logo, airline_name
+		FROM t_airline
+		WHERE airline_id=#{airlineId1234}
+	</select>
+	<select id="getMyAiPack" resultType="com.js.dto.MyAiPackDto">
+		SELECT
+			img_filename AS packImg,
+			present_list AS presentList,
+			missing_list AS missingList,
+			advice AS advice
+		FROM ai_pack
+		WHERE member_id=#{id}
+	</select>
+	<select id="getWriterIdByRecommendReviewIdx" resultType="java.lang.String">
+		SELECT member_id FROM recommend_review WHERE recommend_review_idx = #{recommendReviewIdx}	
+	</select>
+	<delete id="deleteMyCityReview">
+		BEGIN
+			DELETE FROM recommend_review WHERE recommend_review_idx=#{recommendReviewIdx};
+			DELETE FROM recommend_review_good WHERE recommend_review_idx=#{recommendReviewIdx};
+			DELETE FROM recommend_review_pic WHERE recommend_review_idx=#{recommendReviewIdx};
+		END;
+	</delete>
+	<select id="getMyAiRecommendPlace" resultType="com.js.dto.AiRecommendPlaceDto">
+		SELECT 
+		    day, 
+		    a.place_idx AS placeIdx,
+		    a.place_order AS placeOrder,
+		    p.category,
+		    p.name,
+		    p.intro,
+		    p.place_img AS placeImg,
+		    p.latitude,
+		    p.longitude
+		FROM ai_recommend_place a, place p
+		WHERE a.place_idx=p.place_idx AND member_id=#{id}
+		ORDER BY day, place_order
+	</select>
+	<select id="getCityImgByIdx" resultType="java.lang.String">
+		SELECT city_img FROM city WHERE city_idx=#{cityIdx}
+	</select>
+	<select id="getMyDBPlaceList" resultType="map">
+		SELECT place_idx, name FROM place WHERE city_idx = (SELECT city_idx FROM city WHERE city_name=#{cityName}) ORDER BY place_idx
+	</select>
+	<select id="getAllMyDBPlaceList" resultType="map">
+		SELECT place_idx, name, city_name 
+		FROM place, city
+		WHERE place.city_idx = city.city_idx
+		ORDER BY place_idx
+	</select>
+	<delete id="deleteAIRecommendPlaceList">
+		DELETE FROM ai_recommend_place WHERE member_id=#{id}
+	</delete>
+	<insert id="insertAIRecommendPlace">
+		INSERT INTO ai_recommend_place(member_id, day, place_order, place_idx)
+		VALUES(#{id}, #{day}, #{placeOrder}, #{placeIdx})
+	</insert>
+	<select id="getClickHistoryLastOneWeekByMemberId" resultType="map">
+		SELECT p.place_idx, p.name, COUNT(*) click_cnt
+		FROM click c, place p
+		WHERE c.place_idx = p.place_idx
+		AND member_id=#{id}
+		AND click_date >= SYSDATE-7
+		GROUP BY p.place_idx, p.name
+		ORDER BY click_cnt DESC
+	</select>
+	<select id="getCityNameByIdx" resultType="java.lang.String">
+		SELECT city_name FROM city WHERE city_idx=#{cityIdx}
+	</select>
+</mapper>

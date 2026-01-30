@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+#map_container {
+	width: 100%;
+	height: 480px;
+	padding-top: 12px;
+}
+#map {
+	width: 100%;
+	height: 480px;
+}
+#chooseplace {
+	width:100%;
+	height:70px;
+    border-radius: 10px;
+  	background-color: white;
+}
+#chooseplace > div:nth-child(1) {
+	border: 3px solid rgb(235,235,235);
+	width: 50px;
+	margin: 10px auto;
+  	border-radius: 10px;
+}
+#chooseplace > #places {
+	width: 98%;
+	height: 30px;
+	margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+#chooseplace > #places > span {
+	margin-right: 10px;
+	padding: 9px;
+    color: black;
+    border-radius: 30px;
+    border: 1px solid rgba(58, 58, 58, 0.3);
+    background-color: rgb(255,255,255);
+    cursor: pointer;
+}
+#chooseplace > #places > span.on {
+	font-weight: bold;
+    color: rgb(7, 111, 240);
+    border: 1px solid rgb(7, 111, 250);
+    background-color: rgb(236, 245, 254);
+}
+#recommend_place_items, #myplace_items {	/* 전체 추천 장소 / 찜 장소 */
+	height: 380px;
+	overflow: auto;
+}
+.recommend_place_item, .myplace_item {
+	width: 98%;
+	height: 48px;
+	margin:0 auto;
+	position: relative;
+    margin-bottom: 5px;
+}
+.recommend_place_item > img, .myplace_item > img {	/* 장소 이미지 */
+	width: 40px;
+	height: 40px;
+	position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 7px;
+}
+.recommend_place_item > span:nth-child(3), .myplace_item > span:nth-child(3) {	/* 장소 명 */
+	position: absolute;
+    top: 5px;
+    left: 60px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgb(80, 80, 80);
+}
+.recommend_place_item > span:nth-child(4), .myplace_item > span:nth-child(4) {	/* 장소 카테고리 / 도시명 */
+    font-size: 11px;
+    position: absolute;
+    left: 60px;
+    bottom: 5px;
+    color: rgb(143, 144, 146);
+}
+.recommend_place_item > span:nth-child(5), .myplace_item > span:nth-child(5) {  /* 선택 */
+	padding: 6px 8px;
+    color: rgb(125, 126, 129);
+    background-color: rgb(245, 245, 245);
+    border-radius: 14px;
+    position: absolute;
+    top: 8px;
+    right: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+#finish_choose {
+	position:fixed;
+	bottom:0px;
+	height:90px;
+	width:98%;
+	transform: translate(-50%, 0);
+   	left: 50%;
+   	background-color: white;
+}
+#finish_choose > .finish_place {
+	height:40%;
+	background-color:  white;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+#finish_choose > .finish_place > .mypickplace {
+	height:34px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-radius:30px;
+    padding:6px;
+    border: 1px solid rgba(58,58,58,0.3);
+}
+#finish_choose > .finish_place > .mypickplace > img:nth-child(1) {
+	width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+#finish_choose > .finish_place > .mypickplace > div:nth-child(2) {
+	font-size: 12px;
+}
+#finish_choose > .finish_place > .mypickplace > img:nth-child(3) {	/* 'x' */
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    cursor: pointer;
+}
+#finish_choose > #choose {
+	font-size: 13px;
+    background-color: rgb(40, 127, 247);
+    height: 39px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 39px;
+    color: white;
+    font-weight: bold;
+    margin-top: 50px;
+    cursor: pointer;
+}
+.fl { float: left; }
+.fr { float: right; }

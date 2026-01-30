@@ -1,0 +1,196 @@
+@charset "UTF-8";
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+#header { width: 100%; height: 50px; position: relative; border-bottom: 1px solid rgb(239, 239, 239); }
+#header > img {	/* 트리플 로고 */
+	position: absolute;
+	width: 57px;
+	top: 15px;
+	left: 14px;
+}
+#header > #x {
+	position: relative;
+	width: 24px;
+	height: 24px;
+	margin-top: 14px;
+	margin-right: 23px;
+	cursor: pointer;
+}
+.day { position: relative; width: 768px; min-height: 310px; margin: 0 auto; padding-bottom: 40px; }	/* day별 창*/
+.day:nth-child(2) { margin-top: -150px; }
+.day:last-child { padding-bottom: 20px; }	/* 마지막 day 창 */
+.day > .map { width: 768px; height: 180px; position: absolute; z-index: 0; }
+.day > .map > div {	width: 100%; height: 100%; }	/* 지도 */
+.day > .day_main  {	/* day별 하얀 창 */
+	width: 708px;
+	min-height: 130px;
+	margin: 170px 30px 0px;
+	padding: 30px 30px 10px;
+	border: 1px solid white;
+    border-radius: 6px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 0px 20px;
+    position: relative;
+    top: 170px;
+}
+.day > .day_main > div:nth-child(1) {	/* Day 1 */
+	color: rgb(58, 58, 58);
+    font-weight: bold;
+    text-align: center;
+    margin: 0px 0px 25px;
+    font-size: 18px;
+    line-height: 1.2;
+}
+.day > .day_main > div:nth-child(2) {	/* 장소 전체 컨테이너 */
+	width: 646px;
+	min-height: 60px;
+}
+.day > .day_main > div:nth-child(2) > div {	/* 장소 1개 컨테이너 */
+	display: flex; 
+	width: 646px;
+	height: 60px;
+	padding-bottom: 20px;
+	cursor: pointer;
+}
+.day > .day_main .number {	/* 번호, 선 컨테이너 */
+	position: relative;
+	width: 20px;
+	height: 40px;
+}
+.day > .day_main .number > div:nth-child(1) {	/* 장소 번호 */
+	font-weight: bold;
+    text-align: center;
+    font-size: 11px;
+    color: white;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 100%;
+}
+.day > .day_main .number > div:nth-child(2) {	/* 번호 밑에 선 */
+	position: absolute;
+	left: 9px;
+    border-right: 2px solid rgba(58, 58, 58, 0.1);
+    height: 40px;
+}
+.day > .day_main > div:nth-child(2) > div:last-child > .number > div:nth-child(2) {	height: 20px; }	/* 마지막 번호의 선 */
+.day > .day_main .place_detail {	/* 장소 내용 컨테이너 */
+	height: 40px;
+	margin-left: 10px;
+}
+.day .place_detail >div:nth-child(1) {	/* 장소명 */
+	color: rgb(58, 58, 58);
+    font-weight: bold;
+    padding: 0px 0px 5px;
+    font-size: 16px;
+    line-height: 1.2;
+}
+.day .place_detail >div:nth-child(2) {	/* 장소 분류 */
+	color: rgba(58, 58, 58, 0.5);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.2;
+}
+#add_plan {	/* 내 일정으로 담기 컨테이너 */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 728px;
+	height: 50px;
+	margin: 160px auto 20px;
+	background-color: rgb(54, 143, 255);
+	border: 1px solid rgb(54, 143, 255);
+	border-radius: 4px;
+	cursor: pointer;
+}
+#add_plan > div {	/* 내 일정으로 담기 */
+	color: rgb(255, 255, 255);
+    font-weight: bold;
+    padding: 0px 0px 0px 4px;
+    font-size: 14px;
+    line-height: 1.2;
+}
+#black_filter {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color: rgba(0,0,0,0.7);
+}
+#popup_registertravel {	/* 일정 등록 팝업 */
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    box-shadow: 0 18px 48px 0 #00000059;
+    border-radius: 8px;
+ 	text-align: center;
+}
+#popup_registertravel > div:nth-child(1) {
+	width:100%;
+	height: 100px;
+	position: relative;
+}
+#popup_registertravel > div:nth-child(1) > div:nth-child(1) {	/* 'x' */
+	position:absolute;
+	background: url("https://assets.triple.guide/images/btn-com-close@3x.png") center / 100%;
+	width:50px;
+	height:50px;
+   	margin-top: 30px;
+   	left: 80px;
+   	cursor: pointer;
+}
+#popup_registertravel > div:nth-child(2) {
+    width: 90%;
+    height: 50px;
+    font-weight: bold;
+    font-size: 28px;
+    text-align: left;
+    margin: 0 auto;
+}
+#popup_registertravel > div:nth-child(3) {
+	text-align: left;
+    width: 90%;
+   	margin: 0 auto;
+    color: rgba(58, 58, 58, 0.9);
+}
+#popup_registertravel > div:nth-child(5) {	/* 등록 완료 파란 버튼 */
+    width: 90%;
+    height: 80px;
+    margin: 500px auto 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(30, 144, 255, 1);
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+.border { border: 1px solid transparent; }
+.daterangepicker {
+	top: 179px !important;
+	width: 825px !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+    margin-top: 30px !important;
+}
+.daterangepicker .calendar-table th, .daterangepicker .calendar-table td {
+	font-size: 20px !important;
+	padding: 13px !important;	
+}
+.daterangepicker .drp-calendar.left {
+	max-width: none !important;
+    margin-left: 30px;
+}
+.daterangepicker .drp-buttons {	/* 버튼이 있던 하단 바 영역을 아예 숨김 처리 */
+    display: none !important;
+}
+.fl { float: left; }
+.fr { float: right; }

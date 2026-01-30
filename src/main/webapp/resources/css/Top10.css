@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+* {	box-sizing: border-box; }
+body { margin: 0; }
+#content { width: 728px; min-height: 100px; margin: 30px auto 0; }
+#content > .title { 
+	margin-bottom: 10px;
+	color: rgb(58, 58, 58);
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 28px; 
+}
+#content > .subtitle { 
+	color: rgba(58, 58, 58, 0.8);
+    font-weight: 500;
+    margin: 0px 0px 10px;
+    font-size: 16px;
+    line-height: 26px;
+}
+#content > .top10 > div { width: 360px; }
+#content .top10items {
+	width: 355px;
+	height: 131px;
+	margin: 20px 0;
+	padding-bottom: 20px;
+	cursor: pointer;
+}
+#content .top10items:NOT(:last-child) {
+	border-bottom: 1px solid rgba(58,58,58,0.1);
+} 
+#content .top10items > div:nth-child(1) { 
+	width: 25px; 
+	height: 100%;
+	color: rgb(54, 143, 255);
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.2; 
+}
+#content .top10items > div:nth-child(2) { width: 215px; height: 100%; }
+#content .top10items > div:nth-child(2) > div:nth-child(1) {  /* 비스타 루프탑 바 */
+	color: rgb(58, 58, 58);
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 16px;
+    line-height: 1.2;
+}
+#content .top10items > div:nth-child(2) > div:nth-child(2) {  /* 황금 불탑 */
+    color: rgba(58, 58, 58, 0.8);
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 14px;
+    line-height: 20px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre-line;
+}
+#content .top10items > div:nth-child(2) > div:nth-child(3).div_star_heart {  /* 별 5.0 */
+    font-weight: 500;
+	font-size: 13px;
+    line-height: 1.2;
+    margin-bottom: 5px;
+}
+#content .div_star_heart > span {
+	position: relative;
+}
+#content .div_star_heart > span:first-child > svg:nth-child(1) {   /* 별 */
+	position: absolute;
+	top: 1px;
+}
+#content .div_star_heart > span:first-child > span:nth-child(2) {   /* 5.0 (별점)*/
+    color: rgb(58, 58, 58);
+    margin: 0 -1px 0 16px;
+}
+#content .div_star_heart > span:first-child > span:nth-child(3) {   /* (5)쩜 : (별점 개수) */  
+	color: rgba(58, 58, 58, 0.4);
+    margin-right: 2px;
+}
+#content .div_star_heart > span:last-child > svg:nth-child(1) {     /* 하트 */
+	position: absolute;
+	top: 3px;
+}
+#content .div_star_heart > span:last-child > span:nth-child(2) {   /* 44 (하트 개수) */  
+    color: rgb(58, 58, 58);
+    margin-left: 15px;
+}
+#content .top10items > div:nth-child(2) > div:nth-child(4) {  /* 술집 미얀마 */
+    color: rgba(58, 58, 58, 0.4);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.2;
+}
+#content .top10items > img:nth-child(3) { 
+    width: 110px;
+    height: 110px;
+    margin-left: 5px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+.fl { float: left; }
+.fr { float: right; }

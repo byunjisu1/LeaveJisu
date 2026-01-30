@@ -1,0 +1,293 @@
+@charset "UTF-8";
+
+#black_filter {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color: rgba(0,0,0,0.7);
+	z-index: 10;
+}
+#menu_open {
+	position: fixed;
+	width: 325px;
+	height: 100%;
+    right: 0;
+	top: 0;
+	background-color: rgb(255, 255, 255);
+	transition: transform 300ms ease-out;
+	z-index: 20;
+}
+#menu_open > div:first-child {
+	width: 325px;
+	height: 52px;
+	padding:9px 12px;
+}
+#menu_open .x {
+	cursor: pointer;
+	height: 34px;
+	width: 34px;
+	background: url(https://assets.triple.guide/images/btn-com-close@3x.png) center / 100%;
+}
+#menu_open > div:nth-child(2){
+	width: 325px;
+	height:80px;
+	padding: 20px 20px 30px;
+	font-size: 23px;
+	cursor: pointer;
+}
+#menu_open > #menuitems > div{
+	width:285px;
+	height: 59px;
+	padding: 20px 0;
+	margin: 0px 20px;
+	color: rgb(58, 58, 58);
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 1.2;
+    border-top: 1px solid rgba(58, 58, 58, 0.1);
+    cursor: pointer;
+}
+#menu_open > #menuitems > div:first-child {
+	border-top: none;
+}
+#menu_open > #profile {
+	width:325px;
+	min-height: 100px;
+}
+#profile { 
+	position: relative; 
+    padding: 20px 20px 30px;
+}
+#profile > .setting {
+	position:absolute;
+	width:20px;
+    right: 28px;
+   	top: -15px;
+   	cursor: pointer;
+}
+#profile > #nickname { 
+	display: block;
+	margin: 20px 0 20px 10px;
+    font-size: 24px;
+    font-weight: 800;
+    color: rgb(58, 58, 58);
+}
+#profile > img:nth-child(3) {	/* 프로필 사진 */
+	position: absolute;
+	top: 30px;
+	right: 20px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;	
+	object-fit: cover;	
+}
+#profile .upcoming_plan {	/* 다가오는 여행 */
+	display: flex;
+	position: relative;
+	height: 60px;
+	background-color: lightskyblue;
+	border-radius: 15px;
+	margin: 15px 0;
+	cursor: pointer;
+}
+.swiper {
+	width: 285px;
+	height: 95px;
+}
+.upcoming_plan.no_data {
+    justify-content: center;
+    color: #31708f;
+    cursor: default;
+}
+#profile .upcoming_plan img {	/* 도시 사진 */
+	position: absolute;
+	width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    top: 4px;
+    left: 9px;
+}
+#profile .upcoming_plan span {	/* 일정 D-day */
+	font-size: 17px;
+	font-weight: bold;
+	margin-top: 17px;
+	margin-left: 2px;
+	color: white;
+}
+#profile .upcoming_plan > span:nth-child(2) { width: 140px; margin-left: 70px; }
+#profile > #my_category {	/* 내 여행 / 내 저장 / 내 리뷰 */
+	display: flex;
+	justify-content: space-around;
+	width: 285px;
+}
+#profile > #my_category > div {
+	width: 50px;
+	height: 70px;
+}
+#profile > #my_category > div > img {
+	width: 45px;
+	margin-bottom:-10px;
+	cursor: pointer;
+}
+#profile > #my_category > div > p {
+	font-size: 12px;
+	margin-left: -2px;
+	text-align: center;
+}
+#profile + #menuitems {	/* profile 영역 바로 뒤에 menuitems가 붙어있을 때만(즉, 로그인 시) 여백 발생 */
+    margin-top: 170px;
+}
+#logout {
+	padding: 15px;
+    display: flex;
+    justify-content: center;
+    border-radius: 12px;
+    margin: 3px 10px;
+    border: 1px solid rgba(58, 58, 58, 0.3);
+    color: rgb(58, 58, 58);
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+#set {
+	position:relative;
+}
+#popup_changeprofile {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    width: 500px;
+    height: 150px;
+    z-index: 20;
+    box-shadow: 0 18px 48px 0 #00000059;
+    border-radius: 8px;
+	text-align: center;
+}
+#popup_changeprofile {
+    margin-left: -500px;
+    width: 900px;
+    height: 250px;
+}
+#popup_changeprofile .x {
+	cursor: pointer;
+	height: 34px;
+	width: 34px;
+	background: url(https://assets.triple.guide/images/btn-com-close@3x.png) center / 100%;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+#popup_changeprofile > div:nth-child(2){
+	width:300px;
+    margin-left: 313px;
+	margin-top: 43px;
+}
+#popup_changeprofile > div:nth-child(2) > img:nth-child(1){
+	width:60px;
+	height: 60px;
+	object-fit: contain;
+    border-radius: 50%
+}
+#popup_changeprofile > div:nth-child(2) > img:nth-child(2){
+	width:20px;
+	cursor:pointer;
+}
+#popup_changeprofile > div:nth-child(3) {
+	position: relative;
+}
+#popup_changeprofile > div:nth-child(3) > input[type='text'] {
+    margin-top: 10px;
+    width: 90%;
+    height: 30px;
+    border: transparent;
+    border-bottom: 1px solid rgba(58, 58, 58, 0.1);
+    text-align : center;
+    outline: none;
+}
+#popup_changeprofile > div:nth-child(3) > img:nth-child(2) {
+    position: absolute;
+    border-radius: 50%;
+    width: 15px;
+    right: 50px;
+    top: 17px;
+    cursor:pointer;
+}
+#popup_changeprofile > div:nth-child(4) > button {
+    margin-top: 20px;
+    height: 30px;
+    width: 90%;
+    border: transparent;
+    background-color: rgba(135, 206, 250, 0.4);
+    color: white;
+    font-size: 12px;
+} 
+#popup_changeprofile > div:nth-child(4) > button.on {
+	cursor:pointer;
+	background-color : rgba(30, 144, 255, 1);
+}
+#bell {	/* 종 */
+	position: relative;
+	width: 24px;
+	height: 24px;
+	top: 15px;
+	left: -65px;
+	background: url(../img/bell.png) center / 100%;
+	cursor: pointer;
+}
+#bell.new::after {	/* 종 빨간 점 */
+	content:"";
+	position:absolute;
+	top: -6px;
+	right:-7px;
+	width:8px;
+	height:8px;
+	background-color: rgb(253,46,105);
+	border-radius:50%;
+}
+#popup_bell {	/* 알림 팝업 */
+	position: fixed;
+    padding: 15px;
+	width: 500px;
+	background-color: lightgoldenrodyellow;
+	z-index: 20;
+}
+#popup_bell::before {
+	content: "";
+  	position: absolute;
+  	top: -10px;
+  	/* left: 50%; */
+ 	transform: translateX(-50%);
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid lightgoldenrodyellow;
+	z-index: 20;
+}
+#popup_bell > #bell_header > div:nth-child(1) {	/* 'x' */
+	font-size: 35px;
+	line-height: 17px;
+	cursor: pointer;
+}
+#popup_bell > #bell_header > button {	/* 모두 확인 */
+	height: 32px;
+	background-color: lightyellow;
+	border-radius: 10px;
+	cursor: pointer;	
+}
+#popup_bell > #contents {
+	width: 400px;
+	margin: 20px auto 0;
+}
+#popup_bell > #contents > div {	/* 알림 1개 */
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+#popup_bell > #contents > div:hover {	/* hover 알림 */
+	background-color: moccasin;
+	border: 1px solid moccasin;;
+	border-radius: 20px;
+}
+.fl { float: left;}
+.fr { float: right;}

@@ -1,0 +1,10 @@
+/bin/
+/target/
+.settings/
+.metadata/
+.classpath
+.project
+*.class
+*.jar
+.springBeans
+MANIFEST.MF

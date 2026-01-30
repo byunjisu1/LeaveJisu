@@ -1,0 +1,560 @@
+@charset "UTF-8";
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+#header { width: 100%; height: 50px; border-bottom: 1px solid rgb(239, 239, 239); }
+#header > #menu {	/* 삼지창 */
+	width: 24px;
+	height: 24px;
+	background: url(https://assets.triple.guide/images/ico_navi_menu@4x.png) center center / 100% no-repeat;
+	margin: 13px 23px 0 0;
+	cursor: pointer;
+}
+#main { width: 768px; min-height: 788px; margin: 0 auto; }
+#main > div:nth-child(1) { width: 738px; height: 21px; margin: 20px 0px 20px 10px; }
+#main > div:nth-child(1) > div:nth-child(1) {	/* 여행기 */
+	color: rgba(58, 58, 58, 0.7);
+    font-size: 12px;
+}
+#main > img { width: 100%; height: 576px; object-fit: cover; margin-bottom: 50px; }
+#main > div:nth-child(3) { /* 제목 */
+	color: rgb(58, 58, 58);
+    font-weight: bold;
+    padding: 0px 30px;
+    font-size: 24px;
+    line-height: 1.2; 
+}
+#main > div:nth-child(4) { /* 내용 */
+	color: rgba(58, 58, 58, 0.8);
+ 	font-weight: 500;
+  	padding: 20px 30px 0px;
+  	font-size: 16px;
+  	line-height: 1.62;
+}
+#main > div:nth-child(5) {	/* Day보기, 여행코스 박스 컨테이너 */
+	width: 768px;
+	height: 116px;
+ 	padding: 30px 30px 50px;
+}
+#main > div:nth-child(5) > div:first-child { margin-right: 5px; }
+#main > div:nth-child(5) > div:NOT(:last-child) { /* 박스 */
+ 	width: 349px;
+ 	height: 36px;
+ 	border: 1px solid rgba(58, 58, 58, 0.2);
+ 	border-radius: 4px;
+ 	cursor: pointer;
+}
+#main > .box > div { /* 아이콘+텍스트 컨테이너 */
+ 	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+}
+#main > .box > div > svg {	/* 아이콘 */
+ 	margin-top: 9px;
+}
+#main > .box > div > div {	/* day 보기 */
+ 	color: rgb(58, 58, 58);
+ 	font-weight: bold;
+  	padding: 0px 0px 0px 4px;
+  	font-size: 14px;
+  	margin-top: 7px;
+}
+.separator {
+ 	width: 768px;
+ 	height: 10px;
+ 	margin: 0 auto 40px;
+ 	background-color: rgb(239, 239, 239);
+}
+.blog_day_content {
+ 	width: 768px;
+ 	min-height: 260px;
+ 	margin: 0 auto;
+}
+.blog_day_content .day_header {
+	color: rgb(58, 58, 58);
+ 	font-weight: bold;
+  	margin-left: 33px;
+  	margin-bottom: 20px;
+  	font-size: 21px;
+  	line-height: 1.2;
+}
+.blog_day_content .map {
+	width: 768px;
+	margin: 20px auto 0; 
+	height: 240px;	
+}
+.blog_day_content .blog_day_place { /* 장소 전체 컨테이너 */
+ 	width: 708px;
+ 	min-height: 80px;
+ 	margin: 40px auto 0;
+}
+.blog_day_content .blog_day_place > div { /* 장소 1개 컨테이너 */
+ 	width: 708px;
+ 	min-height: 50px;
+ 	margin-bottom: 30px;
+}
+.blog_day_content .blog_day_place > div > div:nth-child(1) { width: 20px; height: 50px; }
+.blog_day_content .blog_day_place .number > div { /* 번호 */
+ 	font-weight: bold;
+  	text-align: center;
+  	font-size: 11px;
+  	color: white;
+  	width: 20px;
+  	height: 20px;
+  	line-height: 20px;
+  	border-radius: 100%;
+}
+.blog_day_content .blog_day_place .content { margin-left: -11px; border-left: 2px solid rgba(58, 58, 58, 0.05); padding-left: 19px; cursor: pointer; }
+.blog_day_content .blog_day_place .content > div:nth-child(1) {	/* 장소명 */
+ 	color: rgb(58, 58, 58);
+  	font-weight: bold;
+  	font-size: 16px;
+  	line-height: 1.2;
+  	margin-bottom: 5px;
+}
+.blog_day_content .blog_day_place .content > div:nth-child(2) {	/* 장소 분류 */
+ 	color: rgba(58, 58, 58, 0.5);
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 1.2;
+}
+.blog_day_content .blog_day_place .content > div:nth-child(4) {	/* 별점 */
+ 	width: 678px;
+ 	height: 21px;
+ 	margin-top: 5px;
+}
+.blog_day_content .blog_day_place .content > div:nth-child(4) > span {
+ 	display: inline-block;
+  	vertical-align: text-bottom;
+  	width: 14px;
+  	height: 14px;
+  	margin-right: -5px;
+  	background-size: 14px 14px;
+}
+.blog_day_content .blog_day_place .content > div:nth-child(4) > span.star {	/* star */
+  	background-image: url(https://assets.triple.guide/images/img-review-star-full@4x.png);
+}
+.blog_day_content .blog_day_place .content > div:nth-child(4) > span.no_star {	/* no star */
+  	background-image: url(https://assets.triple.guide/images/img-review-star-empty@4x.png);
+}
+.blog_day_content .blog_day_place .content > div:nth-child(5) > div {	/* 추가 내용 */
+ 	width: 678px;
+ 	min-height: 60px;
+ 	font-size: 16px;
+  	line-height: 26px;
+  	color: rgba(58, 58, 58, 0.8);
+  	margin-top: 10px;
+  	margin-bottom: 25px;
+}
+.blog_day_content .blog_day_place > div > img:nth-child(3) {	/* 장소 추가 이미지 */
+ 	width: 708px;
+ 	height: 424px;
+ 	object-fit: cover;
+ 	border-radius: 6px;
+}
+.blog_plan_box {
+	width: 768px;
+	height: 150px;
+    padding-left: 30px;
+    padding-right: 30px;
+	margin: 50px auto 0;
+}
+.blog_plan_box > div:nth-child(1) {	/* 일정으로 담기 박스들 컨테이너 */
+	width: 708px;
+	height: 50px;
+	display: flex;
+	gap: 15px;
+}
+.blog_plan_box > div:nth-child(1) > div {
+	width: 346.5px;
+	height: 50px;
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    border-radius: 4px;
+    padding: 3px 12px;
+    cursor: pointer;
+}
+.blog_plan_box > div:nth-child(1) > div:nth-child(1) { background-color: rgb(54, 143, 255); color: rgb(255, 255, 255);}	/* 내 일정으로 담기 박스*/
+.blog_plan_box > div:nth-child(1) > div:nth-child(2) { 
+	border: 1px solid rgba(58, 58, 58, 0.2);
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(58, 58, 58);
+}
+.blog_plan_box > div:nth-child(1) > div > div {	/* 글씨 */
+    font-weight: bold;
+    padding: 0px 0px 0px 4px;
+    font-size: 14px;
+    line-height: 1.2;
+}
+.blog_plan_box > div:nth-child(2) {	/* 선 */
+	margin: 20px 0px 0px;
+    height: 1px;
+    background-color: rgb(239, 239, 239);
+}
+.blog_plan_box > div:nth-child(3) {
+	margin: 20px 0px 40px;
+	display: flex;
+}
+.blog_plan_box > div:nth-child(3) > img {
+	width: 40px;
+    height: 40px;
+    background-color: rgb(239, 239, 239);
+    object-fit: cover;
+    border-radius: 20px;
+}
+.blog_plan_box > div:nth-child(3) > div {
+	color: rgb(58, 58, 58);
+    font-weight: bold;
+    margin: 0px 0px 5px 10px;
+    font-size: 16px;
+    line-height: 40px;
+}
+.blog_comment {
+	width: 768px;
+	min-height: 200px;
+	margin: 0 auto;
+}
+.blog_comment > .comment_list > div { width: 100%; min-height: 68px; margin: 0 30px; }	/* 댓글 1개 컨테이너 */
+.blog_comment > .comment_list > div:NOT(:first-child) { margin-top: 20px; }
+.blog_comment > .comment_list > div > img:nth-child(1) {	/* 프로필 사진 */
+	width: 40px;
+	height: 40px;
+	background-color: rgb(239, 239, 239);
+    object-fit: cover;
+    border-radius: 20px;
+}
+.blog_comment > .comment_list > div > div:nth-child(2) { width: 641px; height: 68px; margin-left: 12px; }
+.blog_comment > .comment_list > div > div:nth-child(2) > div:nth-child(1) {	/* 엄마고사리 */
+	color: rgb(58, 58, 58);
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.blog_comment > .comment_list > div > div:nth-child(2) > div:nth-child(2) {	/* 댓글 내용 */
+	padding-top: 3px;
+	color: rgb(58, 58, 58);
+    display: inline-block;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+}
+.blog_comment .option { display: flex; -webkit-box-align: center; align-items: center;margin-top: 7px; }
+.blog_comment .option > .good {	/* 따봉 */
+	width: 14px;
+	height: 14px;
+	background: url(https://assets.triple.guide/images/btn-lounge-thanks-off@3x.png) center / 100%;
+	object-fit: cover;
+	cursor: pointer;
+}
+.blog_comment .option > .good.on {	/* 색칠 따봉 */
+	background: url(https://assets.triple.guide/images/btn-lounge-thanks-on@3x.png) center / 100%;
+	cursor: pointer;
+}
+.blog_comment .option > div:nth-child(2) {	/* 좋아요 수 */
+	color: rgba(58, 58, 58, 0.3);
+    font-weight: bold;
+    margin-left: 8px;
+    font-size: 12px;
+    line-height: 1.2;
+}
+.blog_comment > .comment_list .comment_option {	/* 점3개 옵션 */
+	width: 19px;
+    height: 19px;
+    padding-left: 3px;
+    margin-top: -3px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(https://assets.triple.guide/images/btn-review-more@4x.png);
+    cursor: pointer;
+}
+.line { width: 768px; margin: 20px -30px 0; height: 1px; background-color: rgb(239, 239, 239); }
+.upload { 
+	display: flex; 
+	width: 768px; 
+	height: 61px; 
+	margin: 0 auto; 
+	padding: 20px; 
+}
+.upload > input[type="text"] {
+	border: none;
+	outline: none;
+	width: 702px;
+	font-size: 15px;
+	line-height: 19px;
+	color: rgb(58, 58, 58);
+	-webkit-box-flex: 2;
+    flex-grow: 2;
+}
+.upload > input[type="text"]::placeholder {
+	color: rgba(58, 58, 58, 0.3);
+	font-size: 15px;
+	line-height: 19px;
+}
+.upload > #upload_btn {	/* 등록 버튼 */
+	width: 26px;
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgba(54, 143, 255, 0.5);
+}
+.upload > #upload_btn.on {	/* 등록 버튼 */
+	width: 26px;
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(54, 143, 255);
+    cursor: pointer;
+}
+.comment_modify {	/* 댓글 수정 */
+	width: 768px; 
+	height: 102px; 
+	margin: 0 auto; 
+}
+.comment_modify > div:nth-child(1) { 
+	width: 768px; 
+	height: 39px;
+	padding: 10px 20px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgba(58, 58, 58, 0.05);
+}
+.comment_modify > div:nth-child(1) > div:nth-child(1) {	/* 댓글 수정 중*/
+	color: rgba(58, 58, 58, 0.7);
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 19px;
+}
+.comment_modify > div:nth-child(1) > div:nth-child(2) {	/* 'x' */
+	width: 18px;
+    height: 18px;
+    font-weight: 200;
+    margin-top: -9px;
+    margin-right: -8px;
+    cursor: pointer;
+}
+.comment_modify > div:nth-child(2) { 
+	display: flex; 
+	justify-content: center;
+    align-items: center;
+    width: 768px; 
+    height: 63px; 
+}
+.comment_modify > div:nth-child(2) > input[type="text"] {
+	border: none;
+	outline: none;
+	width: 702px;
+	font-size: 15px;
+	line-height: 19px;
+	color: rgb(58, 58, 58);
+	-webkit-box-flex: 2;
+    flex-grow: 2;
+    margin-left: 17px;
+}
+.comment_modify > div:nth-child(2) > input[type="text"]::placeholder {
+	color: rgba(58, 58, 58, 0.3);
+	font-size: 15px;
+	line-height: 19px;
+}
+.comment_modify > div:nth-child(2) > div {	/* 등록 버튼 */
+	width: 26px;
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(54, 143, 255);
+    cursor: pointer;
+    margin-right: 22px;
+}
+#black_filter {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(58, 58, 58, 0.7);
+	z-index: 10;
+}
+#popup_day {	/* Day보기 팝업 */
+	position: fixed;
+	width: 100%;
+    max-width: 768px;
+    height: 230px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: white;
+    padding-bottom: 13px;
+    padding-top: 30px;
+    z-index: 20;
+    bottom: 0px;
+    border-radius: 12px 12px 0px 0px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+#popup_day > div:nth-child(1) {	/* Day 보기 */
+	height: 16px;
+    margin: 0px 0px 10px 27px;
+    color: rgba(58, 58, 58, 0.7);
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 1.2;
+    padding-left: 10px;
+}
+#popup_day > div:nth-child(2) {
+	max-height: 300px;
+    padding: 0px 25px;
+}
+#popup_day > div:nth-child(2) > div {	/* Day 1*/
+    line-height: 54px;
+    font-size: 16px;
+    color: rgb(58, 58, 58);
+    font-weight: normal;
+    padding-left: 10px;
+    cursor: pointer;
+}
+#popup_day > div:nth-child(2) > div:hover {	/* hover Day 1*/
+	background-color: rgb(54, 143, 255);
+	border: 1px solid rgb(54, 143, 255);
+	border-radius: 20px;
+	color: white;
+}
+#popup_option {	/* 댓글 점3개 옵션 팝업 */
+	position: fixed;
+	width: 100%;
+    max-width: 768px;
+    height: 175px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: white;
+    padding-bottom: 13px;
+    padding-top: 30px;
+    z-index: 20;
+    bottom: 0px;
+    border-radius: 12px 12px 0px 0px;
+}
+#popup_option > div:nth-child(1) {	/* '내 댓글' */
+    margin: 0px 0px 10px 27px;
+	color: rgba(58, 58, 58, 0.7);
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 1.2;
+    padding-left: 10px;
+}
+#popup_option > div:nth-child(2) {
+	max-height: 300px;
+    padding: 0px 25px;
+}
+#popup_option > div:nth-child(2) > div {	/* 수정하기 */
+    line-height: 54px;
+    font-size: 16px;
+    color: rgb(58, 58, 58);
+    font-weight: normal;
+    cursor: pointer;
+    padding-left: 10px;
+}
+#popup_option > div:nth-child(2) > div:hover {	/* hover 수정하기 */
+	background-color: rgb(54, 143, 255);
+	border: 1px solid rgb(54, 143, 255);
+	border-radius: 20px;
+	color: white;
+}
+#popup_registertravel {	/* 일정 등록 팝업 */
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    box-shadow: 0 18px 48px 0 #00000059;
+    border-radius: 8px;
+ 	text-align: center;
+}
+#popup_registertravel > div:nth-child(1) {
+	width:100%;
+	height: 100px;
+	position: relative;
+}
+#popup_registertravel > div:nth-child(1) > div:nth-child(1) {	/* 'x' */
+	position:absolute;
+	background: url("https://assets.triple.guide/images/btn-com-close@3x.png") center / 100%;
+	width:50px;
+	height:50px;
+   	margin-top: 30px;
+   	left: 80px;
+   	cursor: pointer;
+}
+#popup_registertravel > div:nth-child(2) {
+    width: 90%;
+    height: 50px;
+    font-weight: bold;
+    font-size: 28px;
+    text-align: left;
+    margin: 0 auto;
+}
+#popup_registertravel > div:nth-child(3) {
+	text-align: left;
+    width: 90%;
+   	margin: 0 auto;
+    color: rgba(58, 58, 58, 0.9);
+}
+#popup_registertravel > div:nth-child(5) {	/* 등록 완료 파란 버튼 */
+    width: 90%;
+    height: 80px;
+    margin: 500px auto 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(30, 144, 255, 1);
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+#loading {
+    position: fixed;
+    z-index: 30;
+}
+.loading { 	/*로딩 이미지*/
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 80px;
+	transform: translate(-50%, -50%);
+	margin-top: 360px;
+}
+.daterangepicker {
+	top: 179px !important;
+	width: 825px !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+    margin-top: 30px !important;
+}
+.daterangepicker .calendar-table th, .daterangepicker .calendar-table td {
+	font-size: 20px !important;
+	padding: 13px !important;	
+}
+.daterangepicker .drp-calendar.left {
+	max-width: none !important;
+    margin-left: 30px;
+}
+.daterangepicker .drp-buttons {	/* 버튼이 있던 하단 바 영역을 아예 숨김 처리 */
+    display: none !important;
+}
+#popup_bell {
+	top: 55px;
+	left: 72%;
+}
+#popup_bell::before {
+	left: 86%;
+}
+.fl { float: left; }
+.fr { float: right; }

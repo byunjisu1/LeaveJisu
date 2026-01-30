@@ -1,0 +1,286 @@
+@charset "UTF-8";
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+#header {
+	width: 768px;
+	height: 52px;
+	margin: 0 auto;
+	padding: 9px 12px;
+	position: sticky;
+	background-color: white;
+	top: 0px;
+	z-index: 10;
+}
+#header > #menu {	/* 삼지창 */
+	background-image: url(https://assets.triple.guide/images/ico_navi_menu@4x.png);
+	background-size: cover;
+	width: 24px;
+	height: 24px;
+	margin-right: 11px;
+	margin-top: 22px;
+	cursor: pointer;
+}
+#header2 {
+	width: 1120px;
+	height: 177px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+#header2 > img {	/* 도시 로고 */
+	width: 70px;
+	height: 70px;
+	border-radius: 70px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+#header2 > div:nth-child(2) {	/* 큰제목 */
+	line-height: 36px;
+	font-size: 28px;
+	font-weight: bold;
+	color: rgb(58, 58, 58);
+	margin: 10px auto 0;
+}
+#header2 > div:nth-child(3) {	/* 소제목 */
+	line-height: 17px;
+	font-size: 14px;
+	font-weight: 500;
+	color: rgba(58, 58, 58, 0.5);
+	margin: 8px auto 0;
+}
+#container { width: 768px; min-height: 360px; margin: 0 auto; }
+#map {
+	width: 100%;
+	height: 200px;
+}
+#container > .day_box {
+	width: 768px;
+	height: 62px;
+	margin-top: 8px;
+	padding: 4px 22px;
+	background-color: white;
+}
+#container > .day_box > div:NOT(:last-child) {	/* Day 박스 */
+	padding: 8px 14px;
+	border: 1px solid rgb(58, 58, 58, 0.1);
+	border-radius: 100px;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 16px;
+	color: rgba(58, 58, 58, 0.3);
+	margin-right: 5px;
+	cursor: pointer;
+}
+#container > .day_box > div.on {
+	color: white;
+	background-color: rgb(54, 143, 255);
+	border: 1px solid rgb(54, 143, 255);
+}
+#container > .plan_container {	/* plan 전체 컨테이너 */
+	width: 768px;
+	padding: 0 30px;
+	margin: 16px auto 0;
+	position: relative;
+	z-index: 0;
+}
+#container > .plan_container > div > div {	/* 장소 1개 컨테이너 */
+	position: relative;
+	width: 708px;
+	min-height: 90px;
+	border-left: 2px solid rgb(245, 245, 245);
+	padding-bottom: 21px;
+	padding-left: 19.5px;
+}
+#container > .plan_container > div > div > div:nth-child(1) {	/* 장소 번호 */
+	position: absolute;
+	left: -10px;
+	width: 20px;
+	height: 20px;
+	font-size: 11px;
+	font-weight: 700;
+	color: white;
+	border-radius: 10px;
+	line-height: 20px;
+	text-align: center;
+}
+#container > .plan_container .plan_box {	/* 장소 박스 */
+	margin-top: 8px;
+	box-shadow: rgba(0, 0, 0, 0.07) 0px 0px 20px;
+	border-radius: 6px;
+	padding: 16px 15px;
+	cursor: pointer;
+}
+#container > .plan_container .plan_box > img {	/* 장소 사진 */
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+}
+#container > .plan_container .plan_box > div:nth-child(2) {	margin-left: 10px; }	/* 장소 내용 컨테이너 */
+.plan_box > div:nth-child(2) > div:nth-child(1) {	/* 장소명 */
+	color: rgb(58, 58, 58);
+    font-weight: bold;
+    margin-bottom: 3px;
+    font-size: 16px;
+    line-height: 1.2;
+}
+.plan_box > div:nth-child(2) > div:nth-child(2) {	/* 장소 분류 */
+	color: rgba(58, 58, 58, 0.4);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.2;
+}
+.plan_box > .plan_line {	/* 장소 메모 구분선 */
+	margin: 10px 0;
+	height: 1px;
+	background-color: rgb(239, 239, 239);
+}
+.plan_box > div:nth-child(5) { display: flex; }	/* 추천/장소소개 컨테이너 */
+.plan_box > div:nth-child(5) > div:nth-child(1) {	/* '추천' */
+	color: rgb(54, 143, 255);
+    font-weight: bold;
+    margin-right: 6px;
+    font-size: 13px;
+    line-height: 1.2;
+}
+.plan_box > div:nth-child(5) > div:nth-child(2) {	/* 장소 소개 내용 */
+	color: rgb(58, 58, 58);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.2;
+}
+#like {
+	width: 708px;
+	height: 142px;
+	padding: 24px 20px;
+	margin: 10px auto 13px;
+	text-align: center;
+}
+#like > img { width: 36px; height: 36px; }	/* 하투 */
+#like > div:nth-child(2) {	/* '추천일정이 마음에 드세요?' */
+	margin-top: 6px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: rgb(58, 58, 58);
+    font-weight: bold;
+    line-height: 1.2;
+}
+#like > div:nth-child(3) {	/* 작은 글씨 */
+	color: rgba(58, 58, 58, 0.7);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.2;
+}
+#box { 
+	display: flex;
+	gap: 9px;
+	width: 708px; 
+	height: 54px; 
+	margin: 0 auto 70px; 
+}
+#box > div {	/* 박스 */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 349px;
+	height: 49px;
+	font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    border-radius: 8px;
+	color: rgb(58, 58, 58);
+	background-color: rgba(58, 58, 58, 0.05);
+	padding: 14px 12px;
+    cursor: pointer;
+}
+#box > div > img { width: 18px; height: 18px; object-fit: cover; margin-right: 6px; }
+#black_filter {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color: rgba(0,0,0,0.7);
+}
+#popup_registertravel {	/* 일정 등록 팝업 */
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    box-shadow: 0 18px 48px 0 #00000059;
+    border-radius: 8px;
+ 	text-align: center;
+}
+#popup_registertravel > div:nth-child(1) {
+	width:100%;
+	height: 100px;
+	position: relative;
+}
+#popup_registertravel > div:nth-child(1) > div:nth-child(1) {	/* 'x' */
+	position:absolute;
+	background: url("https://assets.triple.guide/images/btn-com-close@3x.png") center / 100%;
+	width:50px;
+	height:50px;
+   	margin-top: 30px;
+   	left: 80px;
+   	cursor: pointer;
+}
+#popup_registertravel > div:nth-child(2) {
+    width: 90%;
+    height: 50px;
+    font-weight: bold;
+    font-size: 28px;
+    text-align: left;
+    margin: 0 auto;
+}
+#popup_registertravel > div:nth-child(3) {
+	text-align: left;
+    width: 90%;
+   	margin: 0 auto;
+    color: rgba(58, 58, 58, 0.9);
+}
+#popup_registertravel > div:nth-child(5) {	/* 등록 완료 파란 버튼 */
+    width: 90%;
+    height: 80px;
+    margin: 500px auto 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(30, 144, 255, 1);
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+#popup_bell {
+	top: 73px;
+	left: 802px;
+}
+#popup_bell::before {
+	left: 86%;
+}
+.daterangepicker {
+	top: 179px !important;
+	width: 825px !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+    margin-top: 30px !important;
+}
+.daterangepicker .calendar-table th, .daterangepicker .calendar-table td {
+	font-size: 20px !important;
+	padding: 13px !important;	
+}
+.daterangepicker .drp-calendar.left {
+	max-width: none !important;
+    margin-left: 30px;
+}
+.daterangepicker .drp-buttons {	/* 버튼이 있던 하단 바 영역을 아예 숨김 처리 */
+    display: none !important;
+}
+.fl { float: left; }
+.fr { float: right; }

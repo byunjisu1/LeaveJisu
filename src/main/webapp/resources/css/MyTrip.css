@@ -1,0 +1,479 @@
+@charset "UTF-8";
+
+@charset "UTF-8";
+*{ box-sizing: border-box; }
+body{ margin:0; }
+#menu { width:100%; height:100px; }
+#menu > img:nth-child(2) {		/* 삼지창 */
+	width: 24px;
+    margin-top: 20px;
+  	margin-right: 20px;
+  	cursor:pointer;
+}
+#mytrip_profile {
+	width: 100%;
+	height:200px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#mytrip_profile > img:nth-child(1) {	/* 프로필 사진 */
+	width: 110px;
+	height: 110px;
+	object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    margin-top: -55px;
+    border-radius: 50%;
+}
+#mytrip_profile > p:nth-child(2) {	/* 닉네임 */
+	display: block;
+    margin: 0 auto;
+    position: absolute;
+    margin-top: 100px;
+    font-size: 30px;
+    font-weight: bold;
+}
+#main {
+	width:80%;
+	margin: 0 auto;
+}
+#main > #category {		/* 내 여행/ 내 리뷰 */
+	width:100%;
+    display: flex;
+  	justify-content: space-around;
+ 	border-bottom: 1px solid rgba(58, 58, 58, 0.1);
+}
+#main > #category > p.on {
+	font-weight: bold;
+	font-size: 20px;
+	color: rgb(58,58,58);
+	cursor:pointer;
+	border-bottom: 2px solid rgb(39, 139, 250);
+}
+#main > #category > p {
+	font-weight: bold;
+	font-size: 20px;
+    color: rgba(58, 58, 58, 0.3);
+    cursor:pointer;
+ 	padding: 20px 0;
+    margin: 0;
+    text-align: center;
+    width: 50%;
+}
+#main > #createtrip {	/* 일정 추가 */
+	position: relative;
+	background-color: rgba(58, 58, 58, 0.03);
+  	border-radius: 20px;
+	margin-top: 30px;
+ 	cursor:pointer;
+}
+#main > #createtrip > img:nth-child(1) {	/* '+' */
+	width: 60px;
+    margin: 20px;
+    border-radius: 50%;
+}
+#main > #createtrip > div:nth-child(2) > div:nth-child(1) {
+	position:absolute;
+	left: 102px;
+  	top: 25px;
+  	font-weight: bold;
+    font-size: 20px;
+    color: rgba(58, 58, 58);
+}
+#main > #createtrip > div:nth-child(2) > div:nth-child(2) {
+	position:absolute;
+    top: 55px;
+  	left: 102px;
+  	color: rgba(58, 58, 58, 0.7);
+}
+#upcomingtrip {
+	width:100%;
+	min-height:100px;
+}
+#upcomingtrip > div:nth-child(1) {
+	width:100%;
+	height:60px;
+	display: flex;
+   	align-items: center;
+}
+#upcomingtrip > div:nth-child(1) > span {
+	font-weight: bold;
+    font-size: 20px;
+    color: rgb(58, 58, 58);
+    margin-left: 10px;
+}
+#mytripplan {
+	width:100%;
+	min-height:100px;
+}
+#mytripplan > .myplan {
+	position:relative;
+	width:100%;
+	min-height: 20px;
+	margin-bottom:20px;
+}
+#mytripplan > .myplan > .citypic {
+	width:80px;
+	height: 80px;
+	object-fit: cover;
+	border-radius: 50%;
+	cursor:pointer;
+}
+#mytripplan > .myplan > div:nth-child(2) > div:nth-child(1) {	/* city name */
+	position:absolute;
+    top: 20px;
+    left: 100px;
+    font-weight: bold;
+    color: rgb(58, 58, 58);
+    cursor:pointer;
+}
+#mytripplan > .myplan > div:nth-child(2) > div:nth-child(2) {	/* 여행 날짜 */
+	position:absolute;
+    top: 45px;
+    left: 100px;
+    color: rgba(58, 58, 58, 0.7);
+    cursor:pointer;
+}
+#mytripplan > .myplan > div:nth-child(3){
+	margin-top: -56px;
+   	margin-right: 20px;
+}
+#mytripplan > .myplan > div:nth-child(3) > img:nth-child(1) {	/* 수정 아이콘 */
+    margin-right: 30px;
+   	width: 30px;
+   	cursor:pointer;
+}
+#mytripplan > .myplan > div:nth-child(3) > img:nth-child(2) {	/* 삭제 아이콘 */
+    width: 24px;
+    cursor:pointer;
+}
+#myreview { width:80%; margin: 0 auto; }
+#myreview > div > div:nth-child(1) {	/* 내 장소 리뷰 / 내 도시 리뷰 */
+	background-color: lavender;
+    height: 40px;
+    text-align: center;
+    line-height: 35px;
+    font-weight: bold;
+}
+#myreview .city {
+	height: 46px;
+	position: relative;
+	background-color: rgb(245,245,245);
+}
+#myreview .city > span:nth-child(1) {
+    position: absolute;
+    font-size: 15px;
+    font-weight: bold;
+    top: 5px;
+    padding: 8px;
+}
+#myreview .place_content, .city_content { width:100%; position:relative; }
+#myreview .place_content > p:nth-child(1) {	/* 장소명 */
+	margin: 20px 5px 0;
+  	font-weight: bold;
+  	cursor: pointer;
+}
+#myreview .place_content > span:nth-child(2) {	/* 장소 카테고리 */
+	position:absolute;
+    color: gray;
+    margin-left: 5px;
+    font-size: 12px;
+    position: absolute;
+}
+#myreview .place_content > .star {	/* 별점 */
+    margin-top: 31px;
+  	margin-left: 5px;
+  	width:70px;
+}
+#myreview .place_content > .star > img {
+	width: 18px;
+	margin-right: -9px;
+}
+#myreview .place_content > p:nth-child(4), .city_content > p {	/* 내용 */
+	margin-left: 5px;
+  	font-size: 15px;
+}
+#myreview .place_content > span:nth-child(5), .city_content > span {	/* 리뷰 작성 날짜 */
+	position:absolute;
+	color: rgba(58, 58, 58, 0.4);
+    font-size: 12px;
+    right: 18px;
+    top: 89px;
+}	
+#myreview .bottom {
+	position: relative;
+	display: flex;
+	padding-bottom: 30px;
+	border-bottom: 5px solid rgb(58, 58, 58, 0.05);
+}
+#myreview .bottom > .p_good, #myreview .bottom > .c_good {	/* 따봉 */
+	width: 20px;
+	height: 20px;
+	background: url(https://assets.triple.guide/images/btn-lounge-thanks-off@3x.png) center / 100%;
+	object-fit: cover;
+	margin-left: 5px;
+	cursor: pointer;
+}
+#myreview .bottom > .p_good.on, #myreview .bottom > .c_good.on {	/* 색칠 따봉 */
+	background: url(https://assets.triple.guide/images/btn-lounge-thanks-on@3x.png) center / 100%;
+	cursor: pointer;
+}
+#myreview .bottom > div:nth-child(2) {	/* 따봉 수 */
+	position: absolute;
+    font-size: 15px;
+    color: rgba(58, 58, 58, 0.4);
+    font-weight: bolder;
+    left: 30px;
+}
+#myreview .bottom > img:nth-child(3) {	/* 삭제 */
+	width: 16px;
+    position: absolute;
+  	right: 15px;
+  	cursor: pointer;
+}
+#popup_createplan {
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 600px;
+    height: 300px;
+    z-index: 20;
+    box-shadow: 0 18px 48px 0 #00000059;
+    border-radius: 8px;
+ 	text-align: center;
+}
+#popup_createplan > div:nth-child(1) {
+	width:100%;
+	height:40px;
+	position:relative;
+}
+#popup_createplan > div:nth-child(1) > div:nth-child(1) { /* 'x' */
+	position:absolute;
+	background: url("https://assets.triple.guide/images/btn-com-close@3x.png") center / 100%;
+	width:50px;
+	height:50px;
+    margin-top: 30px;
+    top: -20px;
+    right: 40px;
+    cursor: pointer;
+}
+#popup_createplan > div:nth-child(2) {
+	width:500px;
+	height:200px;
+	margin: 0 auto;
+}
+#popup_createplan > div:nth-child(2) > div:nth-child(1) {	/* 선 */
+	width: 100%;
+    height: 20px;
+    border-bottom: 4px solid rgb(58,58,58);
+}
+#popup_createplan > div:nth-child(2) > div:nth-child(2) {	/* 일정 생성 */
+	position:absolute;
+	width:100%;
+	height:30px;
+    left: -200px;
+    font-size: 15px;
+    top: 89px;
+    color: rgba(58, 58, 58, 0.8);
+}
+#popup_createplan > div:nth-child(2) > div:nth-child(3) {	/* 직접 일정 만들기 */
+	position:absolute;
+	top: 155px;
+   	left: 70px;
+   	cursor: pointer;
+}
+#popup_createplan > div:nth-child(2) > div:nth-child(4) {	/* AI 일정 추천받기 */
+	position:absolute;
+    top: 215px;
+    left: 70px;
+    cursor: pointer;
+}
+#popup_deleteplan {
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 480px;
+    z-index: 20;
+    box-shadow: 0 18px 48px 0 #00000059;
+    border-radius: 8px;
+ 	text-align: center;
+}
+#popup_deleteplan > div:nth-child(1) {
+	font-size: 20px;
+    margin-top: 48px;
+    color: black;
+}
+#popup_deleteplan > div:nth-child(2) {
+	display: flex;
+	width:100%;
+	height:70px;
+	margin-top:40px;
+	border-bottom-left-radius: 8px;
+   	border-bottom-right-radius: 8px;
+}
+#popup_deleteplan > div:nth-child(2) > div {
+	width: 240px;
+    border-top: 1px solid rgba(58, 58, 58, 0.3);
+    color: rgba(58, 58, 58, 0.5);
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 60px;
+    cursor: pointer;
+}
+#popup_deleteplan > div:nth-child(2) > div:nth-child(2) {
+    border-left: 1px solid rgba(58, 58, 58, 0.3);
+    color: rgba(30, 144, 255, 1);
+}
+#popup_deletereview {
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 400px;
+    z-index: 20;
+    box-shadow: 0 18px 48px 0 #00000059;
+    border-radius: 8px;
+	text-align: center;
+}
+#popup_deletereview > div:nth-child(1) {
+	font-size: 20px;
+    margin-top: 48px;
+    color: black;
+}
+#popup_deletereview > div:nth-child(2) {
+	position:relative;
+	width:100%;
+	height:70px;
+	margin-top:40px;
+	border-bottom-left-radius: 8px;
+   	border-bottom-right-radius: 8px;
+}
+#popup_deletereview > div:nth-child(2) > div:nth-child(1) {
+	position:absolute;
+	width: 199px;
+   	height: 68px;
+  	display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(58, 58, 58, 0.3);
+    color: rgba(58, 58, 58, 0.5);
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+}
+#popup_deletereview > div:nth-child(2) > div:nth-child(2) {
+	position: fixed;
+	width: 199px;
+   	height: 68px;
+   	right:0;
+  	display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(58, 58, 58, 0.3);
+    border-left: 1px solid rgba(58,58,58,0.3);
+    font-weight: bold;
+    color: rgba(30, 144, 255, 1);
+    font-size: 17px;
+    cursor: pointer;
+}
+#popup_changedate {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    box-shadow: 0 18px 48px 0 #00000059;
+    border-radius: 8px;
+ 	text-align: center;
+}
+#popup_changedate > div:nth-child(1) {
+	width:100%;
+	height: 100px;
+	position: relative;
+}
+#popup_changedate > div:nth-child(1) > div:nth-child(1) {	/* 'x' */
+	position:absolute;
+	background: url("https://assets.triple.guide/images/btn-com-close@3x.png") center / 100%;
+	width:50px;
+	height:50px;
+   	margin-top: 30px;
+   	left: 80px;
+   	cursor: pointer;
+}
+#popup_changedate > div:nth-child(2) {
+    width: 90%;
+    height: 50px;
+    font-weight: bold;
+    font-size: 28px;
+    text-align: left;
+    margin: 0 auto;
+}
+#popup_changedate > div:nth-child(3) {
+	text-align: left;
+    width: 90%;
+   	margin: 0 auto;
+    color: rgba(58, 58, 58, 0.9);
+}
+#popup_changedate > img:nth-child(4) {
+	width:1200px;
+}
+#popup_changedate > div:nth-child(5) {	/* 완료 파란 버튼 */
+    width: 90%;
+    height: 80px;
+    margin: 500px auto 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(30, 144, 255, 1);
+    display: flex;
+    justify-content: center;
+	align-items: center;
+}
+#btn_modify_date {
+	cursor: pointer;
+}
+#popup_bell {	/* 알림 팝업 */
+    top: 65px !important;
+    left: 72% !important;
+}
+#popup_bell::before {
+  	left: 89% !important;
+}
+.highlight_review {	/* 리뷰 스크롤 이동 될 때의 하이라이트 효과 */
+    background-color: #FFF9C4 !important;
+    border: 2px solid #FFD600 !important;
+    box-shadow: 0 0 15px rgba(255, 214, 0, 0.5);
+    transition: all 0.5s ease;
+    z-index: 10;
+    position: relative;
+}
+.daterangepicker {
+	top: 179px !important;
+	width: 825px !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+}
+.daterangepicker .calendar-table th, .daterangepicker .calendar-table td {
+	font-size: 20px !important;
+	padding: 13px !important;	
+}
+.daterangepicker .drp-calendar.left {
+	max-width: none !important;
+    margin-left: 30px;
+}
+/* 버튼이 있던 하단 바 영역을 아예 숨김 처리 */
+.daterangepicker .drp-buttons {
+    display: none !important;
+}
+.fl{ float: left;}
+.fr{ float: right;}

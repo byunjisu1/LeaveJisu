@@ -1,0 +1,221 @@
+@charset "UTF-8";
+;
+* { box-sizing: border-box; }
+body { margin: 0; }
+#header { 
+	position: relative; 
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid rgb(247, 247, 247);
+	background-color: white;
+}
+#header > img {   /* 왼쪽 화살표 */
+	width: 24px; 
+	height: 24px; 
+	position: absolute; 
+    top: 12px;
+	left: 11px;
+	cursor: pointer;
+}
+#category {
+	height: 60px;
+	background-color: rgb(250, 250, 250);
+	display: flex;
+    align-items: center;
+    gap: 11px;
+    padding-left: 645px;
+}
+#category > span {
+	padding: 8px 12px;
+	background-color: white;
+	color: rgb(41, 41, 41);
+	border-radius: 20px;
+	cursor: pointer;
+}
+#category > span.on {
+	background-color: rgb(80, 140, 247);
+	color: white;
+}
+#content {
+	width: 790px;
+	margin: 0 auto 210px;
+}
+#content > .title {   /* 일본 */
+	height: 70px;
+	line-height: 70px;
+	font-weight: 600px;
+	font-size: 14px;
+}
+.item {
+	width: 100%;
+	height: 50px;
+	margin-bottom: 20px;
+}
+.item > img:first-child {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.item > div:nth-child(2) {
+	margin-left: 10px;
+}
+.item > div:nth-child(2) > p {
+    margin: 5px 0;
+    font-weight: 600;
+    font-size: 18px;
+}
+.item > div:nth-child(2) > span {
+	color: rgb(190, 190, 190);
+ 	font-size: 14px;
+}
+.item > span:nth-child(3) {	/* 도시 선택 버튼 */
+	font-size: 14px;
+  	font-weight: 800;
+   	padding: 8px 14px;
+   	background-color: rgb(245, 245, 245);
+   	border-radius: 20px;
+   	cursor: pointer;
+}
+#choosecity {
+	position:fixed;
+	bottom:0;
+	width:100%;
+	position: fixed;
+    height: 178px;
+    left: 0;
+    background-color:white;
+    overflow-x: auto;
+}
+#choosecity > .city {
+	position: relative;
+	width:100px;
+	height:88px;
+}
+#choosecity > .city > img:nth-child(1) {	/* 도시 사진 */
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+#choosecity > .city > img:nth-child(2) {	/* 'x' */
+	width:20px;
+	height: 20px;
+	object-fit: cover;
+	border-radius: 50%;
+    position: absolute;
+    margin-top: 15px;
+    margin-left: -12px;
+    cursor: pointer;
+}
+#choosecity > .city > p:nth-child(3) {	/* 도시명 */
+    font-size: 15px;
+    margin-left: 25px;
+    color: rgb(163, 163, 163);
+    text-align: center;
+   	margin-left: -25px;
+   	margin-top:3px;
+}
+#choosecity > #mychoose {	/* 선택완료 버튼 */
+	color: white;
+    font-weight: bold;
+    height: 55px;
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(80, 140, 245);
+    margin: 0 auto;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    cursor: pointer;
+}
+#choosecity > img {	/* 오른쪽 화살표 */
+    margin-top: 30px;
+    margin-left: -15px;
+    width: 30px;
+}
+#black_filter {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color: rgba(0,0,0,0.7);
+}
+#popup_registertravel {	/* 일정 등록 팝업 */
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    box-shadow: 0 18px 48px 0 #00000059;
+    border-radius: 8px;
+ 	text-align: center;
+}
+#popup_registertravel > div:nth-child(1) {
+	width:100%;
+	height: 100px;
+	position: relative;
+}
+#popup_registertravel > div:nth-child(1) > div:nth-child(1) {	/* 'x' */
+	position:absolute;
+	background: url("https://assets.triple.guide/images/btn-com-close@3x.png") center / 100%;
+	width:50px;
+	height:50px;
+   	margin-top: 30px;
+   	left: 80px;
+   	cursor: pointer;
+}
+#popup_registertravel > div:nth-child(2) {
+    width: 90%;
+    height: 50px;
+    font-weight: bold;
+    font-size: 28px;
+    text-align: left;
+    margin: 0 auto;
+}
+#popup_registertravel > div:nth-child(3) {
+	text-align: left;
+    width: 90%;
+   	margin: 0 auto;
+    color: rgba(58, 58, 58, 0.9);
+}
+#popup_registertravel > div:nth-child(5) {	/* 등록 완료 파란 버튼 */
+    width: 90%;
+    height: 80px;
+    margin: 500px auto 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(30, 144, 255, 1);
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+.daterangepicker {
+	top: 179px !important;
+	width: 860px !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+    margin-top: 30px !important;
+}
+.daterangepicker .calendar-table th, .daterangepicker .calendar-table td {
+	font-size: 20px !important;
+	padding: 13px !important;	
+}
+.daterangepicker .drp-calendar.left {
+	max-width: none !important;
+}
+.daterangepicker .drp-buttons {	/* 버튼이 있던 하단 바 영역을 아예 숨김 처리 */
+    display: none !important;
+}
+.fl { float: left; }
+.fr { float: right; }

@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+#header > #menu { 
+	width: 30px; 
+	height: 30px;
+	background:url(https://assets.triple.guide/images/ico_navi_menu@4x.png) center / 100%;
+	margin: 20px;
+	cursor: pointer;
+}
+#header2 {
+    color: rgba(58, 58, 58);
+    font-weight: bold;
+    font-size: 35px;
+    margin: 30px;
+    display: flex;
+ 	justify-content: center;
+}
+#picarea > #pic {
+	width:335px;
+	height: 300px;
+	margin: 0 auto 30px;
+	border: 1px solid lightgrey;
+}
+#picarea > #pic > img { 
+	width: 100%;
+	height: 100%;
+	object-fit: contain ;
+}
+#real_file {
+	display: none;
+}
+#picarea > form > button:nth-child(1) {
+	display: block;
+   	margin: 0 auto;
+   	padding: 10px;
+   	color: rgb(58, 58, 58);
+    background-color: rgb(58, 58, 58, 0.2);
+    width: 230px;
+    font-size: 23px;
+    border: none;
+    border-radius: 10px;
+    height: 60px;
+    box-shadow: 10px 17px 30px 0 #00000059;
+    cursor: pointer;
+}
+#main {
+	display: flex;
+	justify-content: center;
+	width:90%;
+	margin: 0 auto;
+}
+#main > div {
+	width: 30%;
+}
+#main > div > div:nth-child(1), .advice > div:nth-child(1) {	/* present, missing, advice 문구 */
+	color: lightcoral;
+    margin-top: 37px;
+    font-size: 21px;
+    font-weight: bold;
+    text-align: center;
+}
+#main .item {
+	text-align: center;
+	position: relative;
+	width: 300px;
+	margin: 10px auto;
+}
+#main .item > img:nth-child(1) {	/* 체크 표시 */
+	position: absolute;
+	left:0px;
+	top:-15px;
+}
+.advice {
+	width: 500px;
+	margin: 40px auto 50px;
+}
+.advice > div:nth-child(2)	{	/* 조언 */
+	text-align: center;
+	margin-top: 17px;
+	font-weight:bold;
+}
+#popup_bell {
+	top: 65px;
+	left: 72%;
+}
+#popup_bell::before {
+	left: 86%;
+}
+.fl {float: left;}
+.fr {float: right;}
